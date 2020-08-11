@@ -1,0 +1,42 @@
+.submit-textbox {
+    display: flex;
+    width: 100%;
+    justify-content: stretch;
+    
+    &_input {
+        width: 100%;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #ffffff;
+        border-radius: 10px 0px 0px 10px;
+        border: 2px solid #0277BD;
+    }
+
+    &_button {
+        background-color: #0277BD;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #ffffff;
+        border: none;
+        border-radius: 0px 10px 10px 0px;
+        cursor: pointer;
+        transition: opacity .3s;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+    
+    @media (max-width: 500px) {
+        flex-direction: column;
+
+        &_input {
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        &_button {
+            width: 100%;
+            border-radius: 0px 0px 10px 10px;
+        }
+    }
+}

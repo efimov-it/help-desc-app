@@ -1,0 +1,121 @@
+.main-page {
+    &_wrapper {
+        display: flex;
+        padding: 0px 20px;
+        justify-content: center;
+    }
+
+    width: 1024px;
+    padding: 100px 0px;
+
+    @media (max-width: 1024px) {
+        padding: 40px 0px;
+    }
+
+    &_card {
+
+        &-counter {
+            &-num {
+                font-weight: 400;
+                font-size: 86px;
+                line-height: 64px;
+                margin-bottom: 15px;
+
+                &__small {
+                    font-size: 64px;
+                }
+            }
+
+            &-title{
+                font-weight: 400;
+                font-weight: 22px;
+                text-transform: uppercase;
+            }
+
+            &-indicator {
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                width: 20px;
+                height: 20px;
+                border-radius: 10px;
+                border: 2px solid #00E676;
+                background: linear-gradient(#00E676, rgba(#00E676, .47));
+                animation: blinking 2s ease-in-out infinite;
+
+                &__yellow {
+                    border-color: #FBD825;
+                    background: linear-gradient(#FBD825, rgba(#FBD825, .47));
+                }
+
+                @keyframes blinking {
+                    0% {
+                        opacity: 100%;
+                    }
+                    50% {
+                        opacity: 50%;
+                    }
+                    100% {
+                        opacity: 100%;
+                    }
+                }
+            }
+        }
+
+        &-button {
+            position: absolute;
+            bottom: 30px;
+        }
+
+        &-title {
+            font-weight: 400;
+            font-size: 42px;
+        }
+
+        &-text {
+            margin-top: 30px;
+            font-size: 22px;
+        }
+
+        &-input {
+            margin: 20px 0px 20px 0px;
+            max-width: 500px;
+        }
+
+        &-img {
+            position: absolute;
+            bottom: -20px;
+            right: -30px;
+
+            @media (max-width: 1024px) {
+                display: none;
+            }
+        }
+    }
+
+    &_cards {
+        display: flex;
+        margin-bottom: 40px;
+
+        & > div {
+            width: calc(50% - 20px);
+        }
+
+        & > div:first-child {
+            margin-right: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            flex-direction: column;
+            
+            & > div {
+                width: 100%;
+            }
+
+            & > div:first-child {
+                margin-right: 0px;
+                margin-bottom: 40px;
+            }
+        }
+    }
+}
