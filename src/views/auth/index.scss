@@ -1,0 +1,12 @@
+.auth-form {
+    display: flex;
+    flex-direction: column;
+
+    & > label > *:not(:last-child) {
+        margin-bottom: 5px;
+    }
+
+    & > label {
+        margin-bottom: 20px;
+    }
+}

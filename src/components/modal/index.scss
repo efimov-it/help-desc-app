@@ -1,0 +1,103 @@
+.modal{
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 32px;
+    z-index: 1;
+    max-width: 500px;
+    max-height: calc(100vh - 60px);
+    animation: modal .3s ease-in-out 1;
+
+    &__hidden {
+        animation: modal-hidden .3s ease-in-out 1;
+    }
+
+    @keyframes modal {
+        0% {
+            opacity: 0;
+            transform: translateY(100px) scale(0.8);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0px) scale(1);
+        }
+    }
+    @keyframes modal-hidden {
+        0% {
+            opacity: 1;
+            transform: translateY(0px) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(100px) scale(0.8);
+        }
+    }
+
+    &_header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+
+        &-title {
+            font-size: 22px;
+        }
+    }
+    &_close {
+        width: 26px;
+        height: 26px;
+        background-image: url(../../assets/ui/close.svg);
+        background-color: #00000000;
+        border: none;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: opacity .3s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+
+
+    &_wrapper {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        z-index: 10;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &_background {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        background-color: rgba(#002135, .4);
+        animation: background .3s ease-in-out 1;
+
+        &__hidden {
+            animation: background-hidden .3s ease-in-out 1;
+        }
+
+        @keyframes background {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes background-hidden {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    }
+}

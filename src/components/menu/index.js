@@ -43,7 +43,8 @@ export default class Menu extends React.Component {
                             Аккаунт ТЕХ. ПОДДЕРЖКИ
                         </div>
                         <button className="menu_user-log material-icons"
-                                title="Войти в аккаунт">
+                                title="Войти в аккаунт"
+                                onClick={this.props.auth}>
                             input
                         </button>
                     </div>
@@ -51,7 +52,7 @@ export default class Menu extends React.Component {
                     <ul className="menu_items-list">
                         {this.state.menuItems.map((item, key) => (
                             <li className="menu_items-list-item"
-                                onClick={item.event}
+                                onClick={()=>{this.menuClose(); item.event()}}
                                 key={key}>
                                 <i className="material-icons">{item.icon}</i>
                                 {item.text}
