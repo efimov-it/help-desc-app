@@ -1,15 +1,17 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  withRouter,
   Switch,
   Route,
   Link
 } from 'react-router-dom'
 import Axios from 'axios'
 
+import Functions from './functions'
+
 import Header from './components/header'
 import Menu from './components/menu'
-import Modal from './components/modal'
+import Modals from './components/modals'
 
 import Auth from './views/auth'
 import AddApplication from './views/add-application'
@@ -19,7 +21,7 @@ import MainPage from './views/main-page'
 import License from './views/license'
 import ControlPanel from './views/control-panel'
 
-export default class App extends React.Component {
+class App extends React.Component {
 
   constructor(props) {
     super(props)
@@ -54,6 +56,10 @@ export default class App extends React.Component {
     this.modalSubmit = this.modalSubmit.bind(this)
     this.applicationStatus = this.applicationStatus.bind(this)
     this.createApplication = this.createApplication.bind(this)
+
+    Object.keys(Functions).forEach(functionName => {
+      this[functionName] = Functions[functionName].bind(this)
+    })
   }
 
   openMenu () {
@@ -103,13 +109,13 @@ export default class App extends React.Component {
       case 'auth' :
         this.closeModal(id)
         this.closeMenu()
-        this.refs.routerRef.history.push('/control-panel');
+        this.props.history.push('/control-panel');
         let userMenu = [
           {
             text: 'Панель управления',
             icon: 'dashboard',
             event: () => {
-              this.refs.routerRef.history.push('/control-panel');
+              this.props.history.push('/control-panel');
             }
           },
           {
@@ -176,7 +182,6 @@ export default class App extends React.Component {
 
   render () {
     return (
-      <Router ref="routerRef">
         <div className="app">
           <Header menuClick={this.openMenu} />
 
@@ -222,19 +227,21 @@ export default class App extends React.Component {
           { this.state.modals ?
             this.state.modals.map((modal, id)=>{
               return (
-                <Modal header={modal.header}
+                <Modals header={modal.header}
                        close={()=>{this.closeModal(id)}}
                        key={id}>
                   <modal.content modalId={id}
                                  modalData={modal.data}
                                  modalError={this.modalError}
                                  modalSubmit={this.modalSubmit}/>
-                </Modal>
+                </Modals>
               )
             }) 
           : ''}
         </div>
-      </Router>
     )
   }
 };
+
+
+export default withRouter(App);
