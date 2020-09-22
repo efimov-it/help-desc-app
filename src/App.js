@@ -7,8 +7,6 @@ import {
 } from 'react-router-dom'
 import Axios from 'axios'
 
-import Functions from './functions'
-
 import Header from './components/header'
 import Menu from './components/menu'
 import Modals from './components/modals'
@@ -56,10 +54,6 @@ class App extends React.Component {
     this.modalSubmit = this.modalSubmit.bind(this)
     this.applicationStatus = this.applicationStatus.bind(this)
     this.createApplication = this.createApplication.bind(this)
-
-    Object.keys(Functions).forEach(functionName => {
-      this[functionName] = Functions[functionName].bind(this)
-    })
   }
 
   openMenu () {
