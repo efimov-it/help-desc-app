@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import {
   withRouter,
   Switch,
@@ -6,6 +7,9 @@ import {
   Link
 } from 'react-router-dom'
 import Axios from 'axios'
+
+import mapStateToProps from './store/mapStateToProps'
+import mapDispatchToProps from './store/mapDispatchToProps'
 
 import Header from './components/header'
 import Menu from './components/menu'
@@ -26,23 +30,7 @@ class App extends React.Component {
 
     this.state = {
       menuIsShown: false,
-      modals: [],
-      menuItems: [
-        {
-          text: 'Подать заявку',
-          icon: 'edit',
-          event: () => {
-            alert(1)
-          }
-        },
-        {
-          text: 'Проверить заявку',
-          icon: 'assignment_turned_in',
-          event: () => {
-            alert(2)
-          }
-        }
-      ]
+      modals: []
     }
 
     this.openMenu = this.openMenu.bind(this)
@@ -56,6 +44,8 @@ class App extends React.Component {
     this.createApplication = this.createApplication.bind(this)
   }
 
+
+  //to redux
   openMenu () {
     this.setState({
       menuIsShown: true
@@ -73,6 +63,7 @@ class App extends React.Component {
     this.createModal(Auth, 'Авторизация')
   }
 
+  //to redux
   createModal (content, header, data) {
     const modals = this.state.modals;
     modals.push({
@@ -212,11 +203,9 @@ class App extends React.Component {
                  Разработка
             </a>
           </footer>
-          
-          
-          { this.state.menuIsShown ? <Menu menuItems={this.state.menuItems}
-                                           closeMenu={this.closeMenu}
-                                           auth={this.showAuth} /> : '' }
+
+          { this.props.state.menu.isShown ? <Menu closeMenu={this.closeMenu}
+                                                  auth={this.showAuth} /> : '' }
 
           { this.state.modals ?
             this.state.modals.map((modal, id)=>{
@@ -238,4 +227,7 @@ class App extends React.Component {
 };
 
 
-export default withRouter(App);
+export default connect(
+  mapStateToProps('app'),
+  mapDispatchToProps('app')
+)(withRouter(App));

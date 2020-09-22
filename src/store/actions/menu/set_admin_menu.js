@@ -1,0 +1,3 @@
+const SET_ADMIN_MENU = "SET_ADMIN_MENU"
+
+export default SET_ADMIN_MENU

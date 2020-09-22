@@ -1,15 +1,18 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
+import mapDispatchToProps from '../../store/mapDispatchToProps'
+import mapStateToProps from '../../store/mapStateToProps'
 import './index.scss'
 import LogoImg from '../../assets/ui/logo-200.png'
 
-export default class Header extends React.Component {
+class Header extends React.Component {
     render () {
         return (
             <header className="header">
                 <button className="header_menu-button"
-                        onClick={this.props.menuClick}
+                        onClick={()=>{this.props.setMenuState(true)}}
                         title="Главное меню" />
                 <div className="header_logo">
                     <Link title="На главную"
@@ -33,3 +36,8 @@ export default class Header extends React.Component {
         )
     }
 }
+
+export default connect(
+    mapStateToProps(),
+    mapDispatchToProps('header')
+)(Header)

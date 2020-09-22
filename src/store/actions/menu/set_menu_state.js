@@ -1,0 +1,3 @@
+const SET_MENU_STATE = "SET_MENU_STATE"
+
+export default SET_MENU_STATE

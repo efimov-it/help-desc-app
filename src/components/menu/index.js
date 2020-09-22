@@ -1,21 +1,18 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
+import mapStateToProps from '../../store/mapStateToProps'
+import mapDispatchToProps from '../../store/mapDispatchToProps'
 import './index.scss'
 
-export default class Menu extends React.Component {
+class Menu extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            menuItems: props.menuItems,
-            isHide: false
-        }
         this.menuClose = this.menuClose.bind(this);
     }
 
     menuClose () {
-        this.setState({
-            isHide: true
-        })
+        this.props.setMenuState(false)
         setTimeout(()=>{
             this.props.closeMenu()
         }, 150)
@@ -24,9 +21,9 @@ export default class Menu extends React.Component {
     render () {
         return (
             <div className="menu_wrapper">
-                <div className={'menu_background ' + (this.state.isHide ? 'menu_background__hidden' : '')}
+                <div className={'menu_background ' + (this.props.menu.isShown ? '' : 'menu_background__hidden')}
                      onClick={this.menuClose} />
-                <nav className={'menu ' + (this.state.isHide ? 'menu__hidden' : '')}>
+                <nav className={'menu ' + (this.props.menu.isShown ? '' : 'menu__hidden')}>
                     <header className="menu_header">
                         <h2 className="menu_title">
                             Меню
@@ -50,7 +47,7 @@ export default class Menu extends React.Component {
                     </div>
 
                     <ul className="menu_items-list">
-                        {this.state.menuItems.map((item, key) => (
+                        {this.props.menu.items.map((item, key) => (
                             <li className="menu_items-list-item"
                                 onClick={()=>{this.menuClose(); item.event()}}
                                 key={key}>
@@ -64,3 +61,8 @@ export default class Menu extends React.Component {
         )
     }
 }
+
+export default connect(
+    mapStateToProps('menu'),
+    mapDispatchToProps('menu')
+)(Menu)
