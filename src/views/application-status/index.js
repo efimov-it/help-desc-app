@@ -58,6 +58,31 @@ class ApplicationStatus extends React.Component {
         })
     }
 
+    sendMessage (e) {
+        e.preventDefault()
+        e.persist()
+        const textarea = e.target[0]
+
+        this.props.createModal({
+            content: LoadingIndicator
+        })
+
+        global.sendRequest({
+            url: '/applications/message/',
+            method: 'post',
+            data: "key=" + this.state.key + "&message=" + textarea.value
+        })
+        .then(_=>{
+            textarea.value = ''
+            this.props.closeModal()
+            this.props.createResultModal('Сообщение было успешно отправлено!', 'success')
+        })
+        .catch(err=>{
+            this.props.closeModal()
+            this.props.createResultModal(err, 'error')
+        })
+    }
+
     render () {
         return (
             <div className="application-status">
@@ -135,13 +160,26 @@ class ApplicationStatus extends React.Component {
                         : '' }
                     </div>
 
-                    <form className="application-status_message" action="">
-                        <p className="application-status_message-text">Вы можете написать сообщение, например если появились обновления по Вашей проблеме.</p>
-                        <textarea className="application-status_message-textarea input input-area"
-                                placeholder="Текст собщения"
-                                title="Сообщение отобразится у исполнителя и оператора заявки."></textarea>
-                        <button type="submit"
-                                className="button">Отправить</button>
+                    <form
+                        className="application-status_message"
+                        action=""
+                        onSubmit={e=>this.sendMessage.apply(this, [e])}
+                    >
+                        <p className="application-status_message-text">
+                            Вы можете написать сообщение, например если появились обновления по Вашей проблеме.
+                        </p>
+                        <textarea
+                            className="application-status_message-textarea input input-area"
+                            placeholder="Текст собщения"
+                            name="message"
+                            title="Сообщение отобразится у исполнителя и оператора заявки."
+                        ></textarea>
+                        <button 
+                            type="submit"
+                            className="button"
+                        >
+                            Отправить
+                        </button>
                     </form>
                 </ScrollBar>
             </div>
