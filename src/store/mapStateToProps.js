@@ -5,9 +5,9 @@ export default function mapStateToProps (component) {
                 menu: state.menu
             }
         }
-        case 'app' : return state => {
+        case 'modals' : return state => {
             return {
-                state
+                modals: state.modals
             }
         }
 

@@ -1,5 +1,4 @@
 import menuActions from '../../actions/menu'
-
 import initialState from '../../initialState'
 
 export default (state = initialState.menu, action) => {

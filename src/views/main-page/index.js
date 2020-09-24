@@ -36,8 +36,7 @@ export default class MainPage extends React.Component {
                                 </h3>
                             </div>
                             <button className="main-page_card-button button button__big"
-                                    title="Открыть форму подачи заявки"
-                                    onClick={this.props.createApplication}>
+                                    title="Открыть форму подачи заявки">
                                 Подать заявку
                             </button>
                         </Card>
@@ -63,7 +62,7 @@ export default class MainPage extends React.Component {
                                 Проверить статус заявки
                             </h2>
                             <p className="main-page_card-text">Укажите идентификатор вашей заявки:</p>
-                            <SubmitTextBox onSubmit={(value)=>{this.props.applicationStatus(value)}}
+                            <SubmitTextBox onSubmit={()=>{alert()}}
                                            buttonText="Проверить"
                                            placeholder="Идентификатор заявки"
                                            inputTitle="Пожалуйста, введите идентификатор заявки"

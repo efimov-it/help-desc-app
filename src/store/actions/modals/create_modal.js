@@ -1,0 +1,3 @@
+const CREATE_MODAL = 'CREATE_MODAL'
+
+export default CREATE_MODAL

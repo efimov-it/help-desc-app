@@ -1,22 +1,29 @@
 import {bindActionCreators} from 'redux'
 
-import menuActionCreators from './actionsCreators/menu'
+import menuActionsCreator from './actionsCreators/menu'
+import modalsActionsCreator from './actionsCreators/modal'
 
 export default function mapDispatchToProps (component) {
     switch (component) {
         case 'menu' : return dispatch => {
             return {
-                setAdminMenu:     bindActionCreators(menuActionCreators.setAdminMenu, dispatch),
-                setGuestMenu:     bindActionCreators(menuActionCreators.setGuestMenu, dispatch),
-                setModeratorMenu: bindActionCreators(menuActionCreators.setModeratorMenu, dispatch),
-                setUserMenu:      bindActionCreators(menuActionCreators.setUserMenu, dispatch),
-                setMenuState:     bindActionCreators(menuActionCreators.setMenuState, dispatch)
+                setAdminMenu:     bindActionCreators(menuActionsCreator.setAdminMenu, dispatch),
+                setGuestMenu:     bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
+                setModeratorMenu: bindActionCreators(menuActionsCreator.setModeratorMenu, dispatch),
+                setUserMenu:      bindActionCreators(menuActionsCreator.setUserMenu, dispatch),
+                setMenuState:     bindActionCreators(menuActionsCreator.setMenuState, dispatch)
             }
         }
         
         case 'header': return dispatch => {
             return {
-                setMenuState:     bindActionCreators(menuActionCreators.setMenuState, dispatch)
+                setMenuState: bindActionCreators(menuActionsCreator.setMenuState, dispatch)
+            }
+        }
+
+        case 'modals' : return dispatch => {
+            return {
+                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch)
             }
         }
 
