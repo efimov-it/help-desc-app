@@ -25,6 +25,7 @@ class App extends React.Component {
             {
               mainRoutes.map(({path, component}, i) => (
                 <Route
+                  exact
                   path={path}
                   component={component}
                   key={i}
