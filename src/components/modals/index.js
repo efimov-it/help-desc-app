@@ -45,13 +45,15 @@ class Modals extends React.Component {
                                     className={'modal' + (this.state.isHidden ? ' modal__hidden' : '')}
                                     key={i}
                                 >
-                                    <header className="modal_header">
-                                        <span className="modal_header-title">
-                                            {modal.header}
-                                        </span>
-                                        <div className="modal_close"
-                                             onClick={this.closeModal} />
-                                    </header>
+                                    { modal.header ?
+                                        <header className="modal_header">
+                                            <span className="modal_header-title">
+                                                {modal.header}
+                                            </span>
+                                            <div className="modal_close"
+                                                onClick={this.closeModal} />
+                                        </header> : ''
+                                    }
                                     <div className="modal_content">
                                         <modal.content data={modal.data} />
                                     </div>

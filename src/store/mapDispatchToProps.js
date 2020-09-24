@@ -29,6 +29,7 @@ export default function mapDispatchToProps (component) {
 
         case 'mainPage' : return dispatch => {
             return {
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
             }
         }
@@ -36,7 +37,8 @@ export default function mapDispatchToProps (component) {
         case 'applicationStatus' : return dispatch => {
             return {
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
-                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch)
+                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
             }
         }
 

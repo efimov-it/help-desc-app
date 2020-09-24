@@ -35,11 +35,16 @@ class MainPage extends React.Component {
     }
 
     applicationStatusModal (code) {
-        this.props.createModal({
-            content: ApplicationStatus,
-            header: "Статус заявки",
-            data: code
-        })
+        if (code === "") {
+            this.props.createResultModal('Вы не указали идентификатор вашей заявки.', 'error')
+        }
+        else {
+            this.props.createModal({
+                content: ApplicationStatus,
+                header: "Заявка #" + code,
+                data: code
+            })
+        }
     }
 
     render () {

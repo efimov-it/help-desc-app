@@ -12,37 +12,54 @@ import LoadingIndicator from '../../components/loadingIndicator'
 class ApplicationStatus extends React.Component {
     constructor (props) {
         super(props)
-
         this.state = {
-            isReady: false
+            applicationText: null,
+            completedDate: null,
+            date: null,
+            key: null,
+            processingDate: null,
+            resultText: null,
+            status: null,
+            supportFullname: null,
+            supportPost: null,
+            operatorFullname: null,
+            operatorPost: null
         }
     }
 
     componentDidMount () {
-            if (typeof this.props.data == 'string' && this.props.data.length > 0) {
-                global.sendRequest({
-                    url: "/applications/status/?key=" + this.props.data,
-                    method: "GET"
-                })
-                .then(resp => {
-                    console.log(resp);
-                    this.setState({
-                        isReady: true
-                    })
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-            }
-            else {
-                this.props.closeModal()
-                this.props.createResultModal('Вы не указали идентификатор вашей заявки.', 'error')
-            }
+        this.props.createModal({
+            content: LoadingIndicator
+        })
+        global.sendRequest({
+            url: "/applications/status/?key=" + this.props.data,
+            method: "GET"
+        })
+        .then(resp => {
+            this.setState({
+                applicationText: resp.application_text,
+                completedDate: resp.completed_date ? new Date(resp.completed_date).toLocaleDateString(global.lang) : '',
+                date: resp.date ? new Date(resp.date).toLocaleDateString(global.lang) : '',
+                key: resp.key,
+                processingDate: resp.processing_date ? new Date(resp.processing_date).toLocaleDateString(global.lang) : '',
+                resultText: resp.result_text,
+                status: resp.status,
+                supportFullname: resp.support_fullname,
+                supportPost: resp.support_post,
+                operatorFullname: resp.operator_fullname,
+                operatorPost: resp.operator_post
+            })
+            this.props.closeModal()
+        })
+        .catch(err => {
+            this.props.closeModal()
+            this.props.closeModal()
+            this.props.createResultModal(err, 'error')
+        })
     }
 
     render () {
         return (
-            this.state.isReady ?
             <div className="application-status">
                 <ScrollBar style={{
                                 width: 'calc(100vw - 80px)',
@@ -54,32 +71,32 @@ class ApplicationStatus extends React.Component {
                     <div className="application-status_indicator">
                         <div className="application-status_indicator-lamp material-icons"
                             title="Заявка зарегистрирована"
-                            date="01.01.2020">assignment</div>
+                            date={this.state.date}>assignment</div>
 
-                        <div className={"application-status_indicator-path" + ('created' === 'created' ? ' application-status_indicator-path__off' : '')} />
+                        <div className={"application-status_indicator-path" + (this.state.status === 'created' ? ' application-status_indicator-path__off' : '')} />
 
-                        <div className={"application-status_indicator-lamp material-icons" + ('created' === 'created' ? ' application-status_indicator-lamp__off' : '')}
+                        <div className={"application-status_indicator-lamp material-icons" + (this.state.status === 'created' ? ' application-status_indicator-lamp__off' : '')}
                             title="Заявка обрабатывается"
-                            date="01.02.2020">build</div>
+                            date={this.state.processingDate}>build</div>
 
-                        <div className={"application-status_indicator-path" + ('created' !== 'completed' ? ' application-status_indicator-path__off' : '')} />
+                        <div className={"application-status_indicator-path" + (this.state.status !== 'completed' ? ' application-status_indicator-path__off' : '')} />
                         
-                        <div className={"application-status_indicator-lamp material-icons" + ('created' !== 'completed' ? ' application-status_indicator-lamp__off' : '')}
+                        <div className={"application-status_indicator-lamp material-icons" + (this.state.status !== 'completed' ? ' application-status_indicator-lamp__off' : '')}
                             title="Заявка выполнена"
-                            date="01.03.2020">done</div>
+                            date={this.state.completedDate}>done</div>
                     </div>
 
                     <h2 className="application-status_header">
                         Ваша заявка {
-                            'created' === 'created' ?
+                            this.state.status === 'created' ?
                                 'зарегистрирована' :
-                                    ('created' === 'processing' ?
+                                    (this.state.status === 'processing' ?
                                         'обрабатывается' : 'выполнена')
                         }
                     </h2>
 
                     <div className="application-status_text">
-                        <strong>Текст заявки:</strong> {"Текст"}
+                        <strong>Текст заявки: </strong> {this.state.applicationText}
                     </div>
 
                     <div className="application-status_executors">
@@ -90,16 +107,16 @@ class ApplicationStatus extends React.Component {
 
                             <div className="application-status_executor-text">
                                 <p className="application-status_executor-name">
-                                    {"Иванов Иван Иванович"}
+                                    {this.state.supportFullname}
                                 </p>
                                 <p className="application-status_executor-post"
                                 title="Исполнитель заявки">
-                                    Исполнитель - {"Техник"}
+                                    Исполнитель - {this.state.supportPost}
                                 </p>
                             </div>
                         </div>
                         
-                        { "Иванов Иван Иванович" ? 
+                        { this.state.operatorFullname ? 
                             <div className="application-status_executor">
                                 <div className="application-status_executor-img material-icons">
                                     person
@@ -107,11 +124,11 @@ class ApplicationStatus extends React.Component {
 
                                 <div className="application-status_executor-text">
                                     <p className="application-status_executor-name">
-                                    {"Иванов Иван Иванович"}
+                                    {this.state.operatorFullname}
                                     </p>
                                     <p className="application-status_executor-post"
                                     title="Ответственный за проведение заявки">
-                                        Оператор - {"Техник"}
+                                        Оператор - {this.state.operatorPost}
                                     </p>
                                 </div>
                             </div>
@@ -128,8 +145,6 @@ class ApplicationStatus extends React.Component {
                     </form>
                 </ScrollBar>
             </div>
-            :
-            <LoadingIndicator />
         )
     }
 }

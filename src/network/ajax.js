@@ -22,23 +22,14 @@ export default function ({
             if (isInnerRequest) {
                 const respData = resp.data
                 if(respData.status === 'success') {
-                    resolve({
-                        status: 'success',
-                        data: respData.data
-                    })
+                    resolve(respData.data)
                 }
                 else {
                     const errorCode = respData.message
                     if (errors[errorCode] !== undefined) {
-                        reject({
-                            status: 'error',
-                            message: errors[errorCode][global.lang]
-                        })
+                        reject(errors[errorCode][global.lang])
                     }
-                    reject({
-                        status: 'error',
-                        message: errors.default[global.lang]
-                    })
+                    reject(errors.default[global.lang])
                 }
             }
             else {
@@ -46,10 +37,7 @@ export default function ({
             }
         }).catch(err => {
             if (isInnerRequest) {
-                reject({
-                    status: 'error',
-                    message: errors.network[global.lang]
-                })
+                reject(errors.network[global.lang])
             }
             else {
                 reject(err)

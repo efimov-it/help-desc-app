@@ -11,7 +11,7 @@ import App from './App'
 
 import AjaxFunction from './network/ajax'
 
-global.lang = 'ru'
+global.lang = 'RU-ru'
 global.sendRequest = AjaxFunction
 
 ReactDOM.render(
