@@ -1,22 +1,45 @@
 import React from 'react'
+import {connect} from 'react-redux'
+
+import mapDispatchToProps from '../../store/mapDispatchToProps'
+import mapStateToProps from '../../store/mapStateToProps'
 
 import Card from '../../components/card'
 import SubmitTextBox from '../../components/submit-textbox'
+
+import AddApplication from '../add-application'
+import ApplicationStatus from '../application-status'
+import SendApplicationCode from '../send-application-code'
 
 import './index.scss'
 import BannerImage1 from '../../assets/ui/main_page_banner_1.png'
 import BannerImage2 from '../../assets/ui/main_page_banner_2.png'
 import BannerImage3 from '../../assets/ui/main_page_banner_3.png'
 
-export default class MainPage extends React.Component {
+class MainPage extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             applicationCount: 7,
-            processingTime: '4,3',
+            processingTime: '4,3'
         }
+    }
+
+    newApplicationsModal () {
+        this.props.createModal({
+            content: AddApplication,
+            header: "Новая заявка"
+        })
+    }
+
+    applicationStatusModal (code) {
+        this.props.createModal({
+            content: ApplicationStatus,
+            header: "Статус заявки",
+            data: code
+        })
     }
 
     render () {
@@ -35,8 +58,11 @@ export default class MainPage extends React.Component {
                                     заявок в обработке
                                 </h3>
                             </div>
-                            <button className="main-page_card-button button button__big"
-                                    title="Открыть форму подачи заявки">
+                            <button
+                                className="main-page_card-button button button__big"
+                                title="Открыть форму подачи заявки"
+                                onClick={()=>this.newApplicationsModal.apply(this)}
+                            >
                                 Подать заявку
                             </button>
                         </Card>
@@ -62,7 +88,7 @@ export default class MainPage extends React.Component {
                                 Проверить статус заявки
                             </h2>
                             <p className="main-page_card-text">Укажите идентификатор вашей заявки:</p>
-                            <SubmitTextBox onSubmit={()=>{alert()}}
+                            <SubmitTextBox onSubmit={(code)=>this.applicationStatusModal.apply(this, [code])}
                                            buttonText="Проверить"
                                            placeholder="Идентификатор заявки"
                                            inputTitle="Пожалуйста, введите идентификатор заявки"
@@ -79,3 +105,8 @@ export default class MainPage extends React.Component {
         )
     }
 }
+
+export default connect(
+    mapStateToProps('mainPage'),
+    mapDispatchToProps('mainPage')
+)(MainPage)

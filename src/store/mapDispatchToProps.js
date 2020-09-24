@@ -27,6 +27,19 @@ export default function mapDispatchToProps (component) {
             }
         }
 
+        case 'mainPage' : return dispatch => {
+            return {
+                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
+            }
+        }
+
+        case 'applicationStatus' : return dispatch => {
+            return {
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch)
+            }
+        }
+
         default: return undefined
     }
 }

@@ -1,0 +1,53 @@
+.loadingIndicator {
+    position: relative;
+    min-width: 150px;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_item {
+        position: absolute;
+        color: #039BE5;
+
+        &__1 {
+            font-size: 60px;
+            margin: -20px 0px 0px -30px;
+            animation: rotate 2s linear infinite;
+        }
+        &__2 {
+            font-size: 30px;
+            margin: 0px 0px 0px 35px;
+            animation: reverse-rotate 2s linear infinite;
+        }
+        &__3 {
+            font-size: 40px;
+            margin: 0px 0px -50px 0px;
+            animation: reverse-rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes reverse-rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+    }
+
+    &::after {
+        content: attr(text);
+        position: absolute;
+        bottom: 0px;
+        width: 80px;
+    }
+}

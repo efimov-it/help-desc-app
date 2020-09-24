@@ -11,7 +11,6 @@ import App from './App'
 
 import AjaxFunction from './network/ajax'
 
-global.apiUrl = "http://localhost:3000/api/v1"
 global.lang = 'ru'
 global.sendRequest = AjaxFunction
 

@@ -53,7 +53,7 @@ class Modals extends React.Component {
                                              onClick={this.closeModal} />
                                     </header>
                                     <div className="modal_content">
-                                        <modal.content />
+                                        <modal.content data={modal.data} />
                                     </div>
                                 </div>
                             ))
