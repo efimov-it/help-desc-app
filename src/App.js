@@ -23,10 +23,10 @@ class App extends React.Component {
           <Header />
           <Switch>
             {
-              mainRoutes.map((route, i) => (
+              mainRoutes.map(({path, component}, i) => (
                 <Route
-                  path={route.path}
-                  component={route.component}
+                  path={path}
+                  component={component}
                   key={i}
                 />
               ))
