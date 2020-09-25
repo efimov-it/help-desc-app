@@ -13,7 +13,7 @@ export default class LoadingIndicator extends React.Component {
 
     componentDidMount () {
         setInterval(()=>{
-            if (this.state.dots != '...') {
+            if (this.state.dots !== '...') {
                 this.setState({
                     dots: this.state.dots + '.'
                 })

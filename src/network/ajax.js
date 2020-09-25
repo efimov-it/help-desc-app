@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import errors from './errors.json'
 
-const baseUrl = process.env.NODE_ENV == 'production' ?
+const baseUrl = process.env.NODE_ENV === 'production' ?
                                         'https://help.stankin.ru/api/v1' :
                                         'http://help.stankin.local/api/v1';
 
@@ -37,7 +37,7 @@ export default function ({
             }
         }).catch(err => {
             if (isInnerRequest) {
-                reject(errors.network[global.lang])
+                reject(errors.default[global.lang])
             }
             else {
                 reject(err)

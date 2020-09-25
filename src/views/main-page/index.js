@@ -9,7 +9,7 @@ import SubmitTextBox from '../../components/submit-textbox'
 
 import AddApplication from '../add-application'
 import ApplicationStatus from '../application-status'
-import SendApplicationCode from '../send-application-code'
+//import SendApplicationCode from '../send-application-code'
 
 import './index.scss'
 import BannerImage1 from '../../assets/ui/main_page_banner_1.png'
