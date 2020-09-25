@@ -1,0 +1,106 @@
+.addApplication{
+    overflow: hidden;
+    height: 100%;
+
+    &_slider {
+        width: 400%;
+        height: 100%;
+        display: flex;
+        justify-content: stretch;
+        transition: transform .5s ease-in-out;
+    }
+    &_slide {
+        width: 25%;
+        position: relative;
+        overflow: hidden;
+        max-height: 100vh;
+        transition: 1s ease-in-out;
+
+        @media (max-width: 500px) {
+            min-height: 100%;
+            overflow-y: auto;
+        }
+    }
+    &_headImg {
+        font-size: 36px;
+        color: #03a9f4;
+        margin-right: 5px;
+    }
+    &_headText {
+        display: flex;
+        align-items: center;
+        font-size: 36px;
+        font-weight: normal;
+    }
+    &_headSubtext {
+        margin: 0px 0px 40px 45px;
+    }
+
+    &_input {
+        width: 100%;
+    }
+
+    &_phoneType {
+        margin-bottom: 20px;
+    }
+
+    &_textarea {
+        height: 150px;
+        resize: none;
+        margin-bottom: 20px;
+    }
+
+    &_table {
+        margin-bottom: 30px;
+
+        td:first-child {
+            font-weight: bold;
+        }
+    }
+
+    &_key {
+        margin: 10px 0px;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 36px;
+        user-select: text;
+        cursor: text;
+        background-color: #efefef;
+    }
+
+    &_buttons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+    &_button {
+        &:not(:first-child) {
+            margin-left: 10px;
+        }
+        margin-bottom: 10px;
+        line-height: 24px;
+    }
+
+    &_buttonIcon {
+        color: #ffffff;
+        margin-left: 10px;
+    }
+}
+
+.phoneType {
+    padding: 0px 10px;
+
+    &_placeholder {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    &_switcher {
+        display: flex;
+
+        & > *:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+}

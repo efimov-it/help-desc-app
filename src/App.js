@@ -13,6 +13,7 @@ import Header from './components/header'
 import Footer from './components/footer'
 import Menu from './components/menu'
 import Modals from './components/modals'
+import Auth from './views/auth'
 
 import mainRoutes from './routes/mainRoutes'
 
@@ -34,7 +35,7 @@ class App extends React.Component {
             }
           </Switch>
           <Footer />
-          <Menu />
+          <Menu authView={Auth} />
           <Modals />
         </div>
     )

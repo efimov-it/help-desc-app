@@ -1,0 +1,49 @@
+.switcher {
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #9a9a9a9a;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    &_state {
+        margin: 3px;
+        width: 14px;
+        height: 14px;
+        background-color: #ffffff;
+        border-radius: 7.5px;
+        transition: transform .3s ease-in-out;
+        position: absolute;
+    }
+
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 60px;
+        height: 20px;
+        border-radius: 10px;
+        top: 0px;
+        left: 0px;
+        background: linear-gradient(90deg, #03a9f4 0%, #00bcd4 70%, #9a9a9a9a 80%);
+        transform: translateX(-40px);
+        opacity: 0;
+        transition: .3s ease-in-out;
+    }
+    
+    &_input {
+        display: none;
+    }
+
+    &_input:checked+& {
+        .switcher_state {
+            transform: translateX(19px);
+        }
+        
+        &::before {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+}

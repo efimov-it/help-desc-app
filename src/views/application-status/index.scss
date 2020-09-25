@@ -16,7 +16,7 @@
             min-width: 70px;
             height: 70px;
             border-radius: 35px;
-            background-color: #039BE5;
+            background: linear-gradient(90deg,#03a9f4,#00bcd4);
             color: #ffffff;
             display: flex;
             align-items: center;
@@ -24,7 +24,7 @@
             box-shadow: 0px 10px 30px rgba(#039BE5, .3);
 
             &__off {
-                background-color: #ffffff;
+                background: #ffffff;
                 border: 2px solid #039BE5;
                 color: #039BE5;
             }
@@ -67,10 +67,10 @@
             height: 10px;
             margin-right: 20px;
             border-radius: 5px;
-            background-color: #039BE5;
+            background: linear-gradient(90deg,#03a9f4,#00bcd4);
 
             &__off {
-                background-color: #ffffff;
+                background: #ffffff;
                 border: 2px solid #039BE5;
             }
 
@@ -99,7 +99,7 @@
         &-img {
             width: 40px;
             height: 40px;
-            background-color: #039BE5;
+            background: linear-gradient(90deg,#03a9f4,#00bcd4);
             display: flex;
             align-items: center;
             justify-content: center;

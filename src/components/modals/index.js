@@ -15,6 +15,17 @@ class Modals extends React.Component {
         this.closeModal = this.closeModal.bind(this)
     }
 
+    componentDidUpdate () {
+        const body = document.getElementsByTagName('body')
+        if (this.props.modals.length > 0) {
+            body[0].style="overflow: hidden"
+        }
+        else {
+            console.log(321);
+            body[0].style=""
+        }
+    }
+
     closeModal() {
         this.setState({
             isHidden: true,
@@ -36,7 +47,6 @@ class Modals extends React.Component {
                     <div className="modal_wrapper">
                         <div
                             className={'modal_background' + (this.props.modals.length === 0 || this.state.backgroundIsHidden ? ' modal_background__hidden' : '')}
-                            onClick={this.closeModal}
                         />
                         
                         {

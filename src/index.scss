@@ -25,14 +25,14 @@ body {
   display: inline-flex;
   overflow: hidden;
   flex-direction: column;
-  color: #0277BD;
+  color: #03a9f4;
 
   &::after {
     content: '';
     opacity: 0;
     height: 1px;
     transform: scaleX(0);
-    background-color: #0277BD;
+    background-color: #03a9f4;
     transition: .3s ease-in-out;
   }
   
@@ -61,18 +61,26 @@ body {
 }
 
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   border-radius: 10px;
-  background-color: #0277BD;
+  background: linear-gradient(90deg,#03a9f4,#00bcd4);
   padding: 10px 30px;
   color: #ffffff;
   font-size: 16px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: opacity .3s ease-in-out;
+  transition: .3s ease-in-out;
 
-  &:hover {
+  &:not(:disabled):hover {
     opacity: .8;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    filter: grayscale(1);
   }
 
   &__big{
@@ -88,8 +96,45 @@ body {
 
 .input {
   border-radius: 10px;
-  border: 2px #0277BD solid;
+  border: 2px #039BE5 solid;
   padding: 10px;
   width: 100%;
   font-size: 16px;
+  transition: .15s ease-in-out;
+
+  &:disabled {
+    border-color: #9a9a9a;
+    color: #9a9a9a;
+  }
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+
+  &_wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #dadada;
+  }
+
+  td {
+    border: 1px solid #dadada;
+    padding: 10px;
+
+    &:first-child {
+      border-left: none;
+    }
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  tr:first-child td{
+    border-top: none;
+  }
+
+  tr:last-child td{
+    border-bottom: none;
+  }
 }

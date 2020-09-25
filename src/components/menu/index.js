@@ -27,6 +27,13 @@ class Menu extends React.Component {
         })
     }
 
+    showAuth () {
+        this.props.createModal({
+            header: 'Авторизация',
+            content: this.props.authView
+        })
+    }
+
     render () {
         return (
             this.props.menu.isShown ?
@@ -51,7 +58,7 @@ class Menu extends React.Component {
                             </div>
                             <button className="menu_user-log material-icons"
                                     title="Войти в аккаунт"
-                                    onClick={this.props.auth}>
+                                    onClick={()=>this.showAuth.apply(this)}>
                                 input
                             </button>
                         </div>

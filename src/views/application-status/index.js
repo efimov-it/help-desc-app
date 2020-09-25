@@ -123,42 +123,46 @@ class ApplicationStatus extends React.Component {
                     <div className="application-status_text">
                         <strong>Текст заявки: </strong> {this.state.applicationText}
                     </div>
+                    
+                    {
+                        this.state.supportFullname ? 
+                            <div className="application-status_executors">
+                                <div className="application-status_executor">
+                                    <div className="application-status_executor-img material-icons">
+                                        person
+                                    </div>
 
-                    <div className="application-status_executors">
-                        <div className="application-status_executor">
-                            <div className="application-status_executor-img material-icons">
-                                person
-                            </div>
-
-                            <div className="application-status_executor-text">
-                                <p className="application-status_executor-name">
-                                    {this.state.supportFullname}
-                                </p>
-                                <p className="application-status_executor-post"
-                                title="Исполнитель заявки">
-                                    Исполнитель - {this.state.supportPost}
-                                </p>
-                            </div>
-                        </div>
-                        
-                        { this.state.operatorFullname ? 
-                            <div className="application-status_executor">
-                                <div className="application-status_executor-img material-icons">
-                                    person
+                                    <div className="application-status_executor-text">
+                                        <p className="application-status_executor-name">
+                                            {this.state.supportFullname}
+                                        </p>
+                                        <p className="application-status_executor-post"
+                                        title="Исполнитель заявки">
+                                            Исполнитель - {this.state.supportPost}
+                                        </p>
+                                    </div>
                                 </div>
+                                
+                                { this.state.operatorFullname ? 
+                                    <div className="application-status_executor">
+                                        <div className="application-status_executor-img material-icons">
+                                            person
+                                        </div>
 
-                                <div className="application-status_executor-text">
-                                    <p className="application-status_executor-name">
-                                    {this.state.operatorFullname}
-                                    </p>
-                                    <p className="application-status_executor-post"
-                                    title="Ответственный за проведение заявки">
-                                        Оператор - {this.state.operatorPost}
-                                    </p>
-                                </div>
+                                        <div className="application-status_executor-text">
+                                            <p className="application-status_executor-name">
+                                            {this.state.operatorFullname}
+                                            </p>
+                                            <p className="application-status_executor-post"
+                                            title="Ответственный за проведение заявки">
+                                                Оператор - {this.state.operatorPost}
+                                            </p>
+                                        </div>
+                                    </div>
+                                : '' }
                             </div>
-                        : '' }
-                    </div>
+                        : ''
+                    }
 
                     <form
                         className="application-status_message"

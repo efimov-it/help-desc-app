@@ -11,7 +11,8 @@ export default function mapDispatchToProps (component) {
                 setGuestMenu:     bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
                 setModeratorMenu: bindActionCreators(menuActionsCreator.setModeratorMenu, dispatch),
                 setUserMenu:      bindActionCreators(menuActionsCreator.setUserMenu, dispatch),
-                setMenuState:     bindActionCreators(menuActionsCreator.setMenuState, dispatch)
+                setMenuState:     bindActionCreators(menuActionsCreator.setMenuState, dispatch),
+                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
             }
         }
         
@@ -39,6 +40,13 @@ export default function mapDispatchToProps (component) {
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
                 createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
+            }
+        }
+
+        case 'addApplication' : return dispatch => {
+            return {
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch)
             }
         }
 

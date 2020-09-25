@@ -1,0 +1,34 @@
+.inputPlaceholder {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-bottom: 20px;
+    width: 100%;
+    min-width: 200px;
+
+    &_placeholder {
+        margin-left: 10px;
+        position: absolute;
+        background-color: #ffffff;
+        border-radius: 5px;
+        padding: 0px 10px;
+        transition: .15s ease-in-out;
+        cursor: text;
+    }
+
+    &_value:not([value=""]) + &_placeholder, &_value:focus + &_placeholder {
+        transform: translateY(-20px);
+        font-size: 14px;
+        color: #039BE5;
+    }
+
+    &_value:disabled + &_placeholder{
+        color: #9a9a9a;
+    }
+
+    &_value:disabled:not([value=""]) + &_placeholder{
+        transform: translateY(-20px);
+        font-size: 14px;
+        color: #9a9a9a;
+    }
+}
