@@ -7,22 +7,25 @@ export default () => {
             {
                 text: 'Панель управления',
                 icon: 'edit',
-                event: () => {
-                    alert('Подача заявки')
+                event: {
+                    type: "url",
+                    url: "/control-panel/"
                 }
             },
             {
                 text: 'Мои заявки',
                 icon: 'assignment',
-                event: () => {
-                    alert('Список заявок')
+                event: {
+                    type: "url",
+                    url: "/control-panel/applications/"
                 }
             },
             {
                 text: 'Настройки',
                 icon: 'settings',
-                event: () => {
-                    alert('Настройки')
+                event: {
+                    type: "url",
+                    url: "/control-panel/settings/"
                 }
             },
         ]

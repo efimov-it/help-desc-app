@@ -10,6 +10,11 @@ export default function mapStateToProps (component) {
                 modals: state.modals
             }
         }
+        case 'menuUser' : return state => {
+            return {
+                user: state.user.data
+            }
+        }
 
         default: return undefined
     }

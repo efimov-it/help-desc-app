@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
+import MenuUser from './user'
+
 import mapStateToProps from '../../store/mapStateToProps'
 import mapDispatchToProps from '../../store/mapDispatchToProps'
 import './index.scss'
@@ -25,14 +27,6 @@ class Menu extends React.Component {
                     isHidden: false
                 })
             }, 150)
-        })
-    }
-
-    showAuth () {
-        this.props.setMenuState(false)
-        this.props.createModal({
-            header: 'Авторизация',
-            content: this.props.authView
         })
     }
 
@@ -68,19 +62,8 @@ class Menu extends React.Component {
                                     title="Закрыть меню"
                                     onClick={this.menuClose} />
                         </header>
-                        <div className="menu_user">
-                            <div className="menu_user-img material-icons">
-                                person
-                            </div>
-                            <div className="menu_user-text">
-                                Аккаунт ТЕХ. ПОДДЕРЖКИ
-                            </div>
-                            <button className="menu_user-log material-icons"
-                                    title="Войти в аккаунт"
-                                    onClick={()=>this.showAuth.apply(this)}>
-                                input
-                            </button>
-                        </div>
+
+                        <MenuUser />
 
                         <ul className="menu_items-list">
                             {this.props.menu.items.map((item, key) => (

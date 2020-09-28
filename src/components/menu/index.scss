@@ -112,67 +112,6 @@
         }
     }
 
-    &_user {
-        width: calc(100% + 30px);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        border-radius: 10px;
-        margin: -15px 0px 50px -15px;
-        padding: 15px;
-        transition: background-color .3s ease-in-out;
-
-        &:hover {
-            background-color: #f3f3f3;
-        }
-
-        &-img {
-            min-width: 80px;
-            max-width: 80px;
-            height: 80px;
-            background-color: #03a9f4;
-            border-radius: 40px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-            color: #ffffff;
-            border: 13px solid #03a9f4;
-            margin-right: 20px;
-
-            @media (max-width: 1024px) {
-                min-width: 50px;
-                max-width: 50px;
-                height: 50px;
-                border-width: 8px;
-                font-size: 50px;
-            }
-        }
-
-        &-text {
-            font-size: 22px;
-
-            @media (max-width: 1024px) {
-                font-size: 14px;
-            }
-        }
-
-        &-log {
-            background-color: #00000000;
-            border: none;
-            color: #484848;
-            font-size: 38px;
-            cursor: pointer;
-            transition: opacity .3s;
-
-            &:hover {
-                opacity: .8;
-            }
-        }
-    }
-
     &_items-list {
         list-style: none;
 

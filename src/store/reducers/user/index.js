@@ -10,6 +10,7 @@ export default (state = initialState.user, action) => {
             }
 
         case UserActions.LOGOUT :
+            localStorage.removeItem('token')
             return {
                 token: null,
                 data: {

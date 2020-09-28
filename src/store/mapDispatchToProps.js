@@ -22,10 +22,10 @@ export default function mapDispatchToProps (component) {
 
         case 'menu' : return dispatch => {
             return {
-                setGuestMenu:     bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
-                setMenuState:     bindActionCreators(menuActionsCreator.setMenuState, dispatch),
+                setGuestMenu:      bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
+                setMenuState:      bindActionCreators(menuActionsCreator.setMenuState, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
-                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch)
             }
         }
         
@@ -44,44 +44,53 @@ export default function mapDispatchToProps (component) {
         case 'mainPage' : return dispatch => {
             return {
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
-                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch)
             }
         }
 
         case 'applicationStatus' : return dispatch => {
             return {
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
-                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
-                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch)
             }
         }
 
         case 'addApplication' : return dispatch => {
             return {
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
-                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch)
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch)
             }
         }
 
         case 'applicationSendCode' : return dispatch => {
             return {
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
-                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
-                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch)
             }
         }
 
         case 'auth' : return dispatch => {
             return {
-                setAdminMenu:     bindActionCreators(menuActionsCreator.setAdminMenu, dispatch),
-                setModeratorMenu: bindActionCreators(menuActionsCreator.setModeratorMenu, dispatch),
-                setUserMenu:      bindActionCreators(menuActionsCreator.setUserMenu, dispatch),
-                setGuestMenu:     bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
+                setAdminMenu:      bindActionCreators(menuActionsCreator.setAdminMenu, dispatch),
+                setModeratorMenu:  bindActionCreators(menuActionsCreator.setModeratorMenu, dispatch),
+                setUserMenu:       bindActionCreators(menuActionsCreator.setUserMenu, dispatch),
+                setGuestMenu:      bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
-                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
-                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch),
-                login: bindActionCreators(userActionsCreator.login, dispatch),
-                setUserData: bindActionCreators(userActionsCreator.setUserData, dispatch)
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                login:             bindActionCreators(userActionsCreator.login, dispatch),
+                setUserData:       bindActionCreators(userActionsCreator.setUserData, dispatch)
+            }
+        }
+
+        case 'menuUser' : return dispatch => {
+            return {
+                setMenuState: bindActionCreators(menuActionsCreator.setMenuState, dispatch),
+                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                logout:       bindActionCreators(userActionsCreator.logout, dispatch),
+                setGuestMenu: bindActionCreators(menuActionsCreator.setGuestMenu, dispatch)
             }
         }
 
