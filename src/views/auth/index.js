@@ -38,16 +38,37 @@ class Auth extends React.Component {
         this.props.createModal({
             content: LoadingIndicator
         })
+        let token
         global.sendRequest({
             method: 'POST',
             url: '/login/',
             data: 'login='+this.state.login+'&password='+this.state.password
         }).then(resp=>{
+            token = resp.token
+            return global.sendRequest({
+                url: '/profile/',
+                headers: {
+                    token
+                }
+            })
+        })
+        .then(resp=>{
             this.props.closeModal()
             this.props.closeModal()
-            localStorage.setItem('token', resp.token)
-            localStorage.setItem('expiresIn', resp.expires_in)
-            this.props.login(resp.token, resp.expires_in)
+            localStorage.setItem('token', token)
+            this.props.login(token)
+            this.props.setUserData({
+                fullName: resp.full_name,
+                login: resp.login,
+                mail: resp.mail,
+                role: resp.user_type,
+                post: resp.user_post
+            })
+            switch (resp.user_type) {
+                case 0 : return this.props.setAdminMenu()
+                case 1 : return this.props.setModeratorMenu()
+                case 2 : return this.props.setUserMenu()
+            }
             this.props.history.push('/control-panel/')
         })
         .catch(err=>{

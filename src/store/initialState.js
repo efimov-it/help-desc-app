@@ -2,10 +2,8 @@ import AddAdpplication from '../views/add-application'
 const initialState = {
     user: {
         token: null,
-        expiresIn: null,
         data: {
-            name: null,
-            surName: null,
+            fullName: null,
             login: null,
             role: null,
             mail: null,

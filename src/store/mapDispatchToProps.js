@@ -6,12 +6,22 @@ import userActionsCreator from './actionsCreators/user'
 
 export default function mapDispatchToProps (component) {
     switch (component) {
-        case 'menu' : return dispatch => {
+        case 'app' : return dispatch => {
             return {
                 setAdminMenu:     bindActionCreators(menuActionsCreator.setAdminMenu, dispatch),
-                setGuestMenu:     bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
                 setModeratorMenu: bindActionCreators(menuActionsCreator.setModeratorMenu, dispatch),
                 setUserMenu:      bindActionCreators(menuActionsCreator.setUserMenu, dispatch),
+                login: bindActionCreators(userActionsCreator.login, dispatch),
+                setUserData: bindActionCreators(userActionsCreator.setUserData, dispatch),
+                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch)
+            }
+        }
+
+        case 'menu' : return dispatch => {
+            return {
+                setGuestMenu:     bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
                 setMenuState:     bindActionCreators(menuActionsCreator.setMenuState, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
@@ -62,10 +72,14 @@ export default function mapDispatchToProps (component) {
 
         case 'auth' : return dispatch => {
             return {
+                setAdminMenu:     bindActionCreators(menuActionsCreator.setAdminMenu, dispatch),
+                setModeratorMenu: bindActionCreators(menuActionsCreator.setModeratorMenu, dispatch),
+                setUserMenu:      bindActionCreators(menuActionsCreator.setUserMenu, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
                 createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch),
-                login: bindActionCreators(userActionsCreator.login, dispatch)
+                login: bindActionCreators(userActionsCreator.login, dispatch),
+                setUserData: bindActionCreators(userActionsCreator.setUserData, dispatch)
             }
         }
 

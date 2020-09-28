@@ -1,11 +1,8 @@
 import LOGIN from '../../actions/user/login'
 
-export default (token, expiresIn) => {
+export default (token) => {
     return {
         type: LOGIN,
-        data: {
-            token,
-            expiresIn
-        }
+        token
     }
 }
