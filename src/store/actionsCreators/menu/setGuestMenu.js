@@ -1,5 +1,7 @@
 import SET_GUEST_MENU from '../../actions/menu/set_guest_menu'
 
+import AddAdpplication from '../../../views/add-application'
+
 export default () => {
     return {
         type: SET_GUEST_MENU,
@@ -7,15 +9,20 @@ export default () => {
             {
                 text: 'Подать заявку',
                 icon: 'edit',
-                event: () => {
-                    alert('Подача заявки')
+                event: {
+                    type: 'modal',
+                    modal: {
+                        header: 'Новая заявка',
+                        content: AddAdpplication
+                    }
                 }
             },
             {
                 text: 'Настройки',
                 icon: 'settings',
-                event: () => {
-                    alert('Страница с настройками')
+                event: {
+                    type: 'url',
+                    url: '/settings'
                 }
             }
         ]

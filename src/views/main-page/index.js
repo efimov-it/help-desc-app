@@ -9,7 +9,7 @@ import SubmitTextBox from '../../components/submit-textbox'
 
 import AddApplication from '../add-application'
 import ApplicationStatus from '../application-status'
-//import SendApplicationCode from '../send-application-code'
+import SendApplicationCode from '../send-application-code'
 
 import './index.scss'
 import BannerImage1 from '../../assets/ui/main_page_banner_1.png'
@@ -45,6 +45,13 @@ class MainPage extends React.Component {
                 data: code
             })
         }
+    }
+
+    sendApplicationCodeModal () {
+        this.props.createModal({
+            header: 'Восстановление доступа к заявкам',
+            content: SendApplicationCode
+        })
     }
 
     render () {
@@ -99,7 +106,10 @@ class MainPage extends React.Component {
                                            inputTitle="Пожалуйста, введите идентификатор заявки"
                                            buttonTitle="Проверить статус заявки по идентификатору"
                                            className="main-page_card-input" />
-                            <span className="link">Я потерял(а) идентификатор заявки</span>
+                            <span
+                                className="link"
+                                onClick={()=>this.sendApplicationCodeModal.apply(this)}
+                            >Я потерял(а) идентификатор заявки</span>
                             <img className="main-page_card-img"
                                  src={BannerImage3}
                                  alt="banner"/>

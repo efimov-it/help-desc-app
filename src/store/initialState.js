@@ -1,3 +1,4 @@
+import AddAdpplication from '../views/add-application'
 const initialState = {
     user: {
         token: null,
@@ -19,15 +20,20 @@ const initialState = {
             {
                 text: 'Подать заявку',
                 icon: 'edit',
-                event: () => {
-                    alert('Подача заявки')
+                event: {
+                    type: 'modal',
+                    modal: {
+                        header: 'Новая заявка',
+                        content: AddAdpplication
+                    }
                 }
             },
             {
                 text: 'Настройки',
                 icon: 'settings',
-                event: () => {
-                    alert('Страница с настройками')
+                event: {
+                    type: 'url',
+                    url: '/settings'
                 }
             }
         ]

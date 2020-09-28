@@ -14,7 +14,8 @@ export default class SubmitTextBox extends React.Component {
             value: e.target.value
         });
     }
-    onSubmit () {
+    onSubmit (e) {
+        e.preventDefault()
         this.props.onSubmit(this.state.value)
         this.setState({
             value: ''
@@ -23,7 +24,10 @@ export default class SubmitTextBox extends React.Component {
 
     render () {
         return (
-            <div className={'submit-textbox' + (this.props.className ? ' ' + this.props.className : '')}>
+            <form
+                className={'submit-textbox' + (this.props.className ? ' ' + this.props.className : '')}
+                action=""
+            >
                 <input
                     className="submit-textbox_input"
                     type="text"
@@ -35,11 +39,11 @@ export default class SubmitTextBox extends React.Component {
                 <button 
                     className="submit-textbox_button"
                     title={this.props.buttonTitle}
-                    onClick={()=>this.onSubmit.apply(this)}
+                    onClick={(e)=>this.onSubmit.apply(this, [e])}
                 >
                     {this.props.buttonText}
                 </button>
-            </div>
+            </form>
         )
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 import mapStateToProps from '../../store/mapStateToProps'
 import mapDispatchToProps from '../../store/mapDispatchToProps'
@@ -28,10 +29,28 @@ class Menu extends React.Component {
     }
 
     showAuth () {
+        this.props.setMenuState(false)
         this.props.createModal({
             header: 'Авторизация',
             content: this.props.authView
         })
+    }
+
+    menuItemsEvent (event) {
+        this.props.setMenuState(false)
+        switch(event.type) {
+            case 'modal' :
+                this.props.createModal(event.modal)
+            break
+
+            case 'url' :
+                this.props.history.push(event.url)
+            break
+
+            default:
+
+            break
+        }
     }
 
     render () {
@@ -66,7 +85,7 @@ class Menu extends React.Component {
                         <ul className="menu_items-list">
                             {this.props.menu.items.map((item, key) => (
                                 <li className="menu_items-list-item"
-                                    onClick={()=>{this.menuClose(); item.event()}}
+                                    onClick={()=>{this.menuItemsEvent.apply(this, [item.event])}}
                                     key={key}>
                                     <i className="material-icons">{item.icon}</i>
                                     {item.text}
@@ -83,4 +102,4 @@ class Menu extends React.Component {
 export default connect(
     mapStateToProps('menu'),
     mapDispatchToProps('menu')
-)(Menu)
+)(withRouter(Menu))

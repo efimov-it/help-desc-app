@@ -50,6 +50,14 @@ export default function mapDispatchToProps (component) {
             }
         }
 
+        case 'applicationSendCode' : return dispatch => {
+            return {
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
+            }
+        }
+
         default: return undefined
     }
 }

@@ -115,10 +115,10 @@ class AddApplication extends React.Component {
                             } : {}
                         }
                     >
-                        <h2 className="addApplication_headText">
-                            <i className="addApplication_headImg material-icons">assignment</i>Шаг 1 из 3
+                        <h2 className="modal-text_headText">
+                            <i className="modal-text_headImg material-icons">assignment</i>Шаг 1 из 3
                         </h2>
-                        <p  className="addApplication_headSubtext">Данные сотрудника</p>
+                        <p  className="modal-text_headSubtext">Данные сотрудника</p>
                         <Input
                             placeholder="Фамилия Имя Отчество"
                             title="Поле для ввода фамилии, имени, отчества."
@@ -172,14 +172,14 @@ class AddApplication extends React.Component {
                             onChange={e=>this.changeValue(e)}
                             className="addApplication_input"
                         />
-                        <div className="addApplication_buttons">
+                        <div className="modal_buttons">
                             <button
                                 title={this.state.workerDataComplete ? "Перейти к следующему шагу" : "Заполните все поля"}
-                                className="button addApplication_button"
+                                className="button modal_button"
                                 onClick={(e)=>this.changePage.apply(this, [e, 1])}
                                 disabled={!this.state.workerDataComplete}
                             >
-                                Далее <i className="addApplication_buttonIcon material-icons">arrow_forward</i>
+                                Далее <i className="modal_buttonIcon material-icons">arrow_forward</i>
                             </button>
                         </div>
                     </div>
@@ -195,10 +195,10 @@ class AddApplication extends React.Component {
                             } : {}
                         }
                     >
-                        <h2 className="addApplication_headText">
-                            <i className="addApplication_headImg material-icons">assignment</i>Шаг 2 из 3
+                        <h2 className="modal-text_headText">
+                            <i className="modal-text_headImg material-icons">assignment</i>Шаг 2 из 3
                         </h2>
-                        <p  className="addApplication_headSubtext">Текст заявки</p>
+                        <p  className="modal-text_headSubtext">Текст заявки</p>
 
                         <textarea
                             className="addApplication_textarea input"
@@ -207,9 +207,9 @@ class AddApplication extends React.Component {
                             onChange={e=>this.changeValue.apply(this, [e])}
                         />
                         
-                        <div className="addApplication_buttons">
+                        <div className="modal_buttons">
                             <button
-                                className="button addApplication_button"
+                                className="button modal_button"
                                 onClick={(e)=>this.changePage.apply(this, [e, 0])}
                                 title="Вернуться к предыдущему шагу"
                             >
@@ -217,12 +217,12 @@ class AddApplication extends React.Component {
                             </button>
 
                             <button
-                                className="button addApplication_button"
+                                className="button modal_button"
                                 onClick={(e)=>this.changePage.apply(this, [e, 2])}
                                 disabled={!this.state.dataComplete}
                                 title={this.state.dataComplete ? "Перейти к следующему шагу" : "Заполните все поля"}
                             >
-                                Далее <i className="addApplication_buttonIcon material-icons">arrow_forward</i>
+                                Далее <i className="modal_buttonIcon material-icons">arrow_forward</i>
                             </button>
                         </div>
                     </div>
@@ -238,10 +238,10 @@ class AddApplication extends React.Component {
                             } : {}
                         }
                     >
-                        <h2 className="addApplication_headText">
-                            <i className="addApplication_headImg material-icons">assignment</i>Почти всё!
+                        <h2 className="modal-text_headText">
+                            <i className="modal-text_headImg material-icons">assignment</i>Почти всё!
                         </h2>
-                        <p  className="addApplication_headSubtext">Осталось только проверить правильность введённых данных</p>
+                        <p  className="modal-text_headSubtext">Осталось только проверить правильность введённых данных</p>
 
                         <div className="addApplication_table table_wrapper">
                             <table className="table">
@@ -282,9 +282,9 @@ class AddApplication extends React.Component {
                             </table>
                         </div>
                         
-                        <div className="addApplication_buttons">
+                        <div className="modal_buttons">
                             <button
-                                className="button addApplication_button"
+                                className="button modal_button"
                                 onClick={(e)=>this.changePage.apply(this, [e, 1])}
                                 title="Вернуться к предыдущему шагу"
                             >
@@ -292,12 +292,12 @@ class AddApplication extends React.Component {
                             </button>
 
                             <button
-                                className="button addApplication_button"
+                                className="button modal_button"
                                 onClick={(e)=>this.sendData.apply(this, [e])}
                                 disabled={!this.state.dataComplete}
                                 title="Отправить заявку"
                             >
-                                Отправить <i className="addApplication_buttonIcon material-icons">done</i>
+                                Отправить <i className="modal_buttonIcon material-icons">done</i>
                             </button>
                         </div>
                     </div>
@@ -318,18 +318,18 @@ class AddApplication extends React.Component {
                             <LoadingIndicator /> :
                             (
                                 <>
-                                    <h2 className="addApplication_headText">
-                                        <i className="addApplication_headImg material-icons">assignment</i>Готово!
+                                    <h2 className="modal-text_headText">
+                                        <i className="modal-text_headImg material-icons">assignment</i>Готово!
                                     </h2>
-                                    <p  className="addApplication_headSubtext">Ваша заявка успешно зарегистрирована!</p>
+                                    <p  className="modal-text_headSubtext">Ваша заявка успешно зарегистрирована!</p>
 
                                     <p>Это идентификатор вашей заявки:</p>
                                     <p className="addApplication_key">{this.state.applicationKey}</p>
                                     <p>Советуем сохранить его или записать, чтобы не потерять.</p>
                                     
-                                    <div className="addApplication_buttons">
+                                    <div className="modal_buttons">
                                         <button
-                                            className="button addApplication_button"
+                                            className="button modal_button"
                                             title="Закрыть окно"
                                             onClick={e=>this.closeModal.apply(this, [e])}
                                         >

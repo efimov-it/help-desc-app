@@ -21,7 +21,6 @@ class Modals extends React.Component {
             body[0].style="overflow: hidden"
         }
         else {
-            console.log(321);
             body[0].style=""
         }
     }

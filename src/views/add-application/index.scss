@@ -21,20 +21,6 @@
             overflow-y: auto;
         }
     }
-    &_headImg {
-        font-size: 36px;
-        color: #03a9f4;
-        margin-right: 5px;
-    }
-    &_headText {
-        display: flex;
-        align-items: center;
-        font-size: 36px;
-        font-weight: normal;
-    }
-    &_headSubtext {
-        margin: 0px 0px 40px 45px;
-    }
 
     &_input {
         width: 100%;
@@ -66,25 +52,6 @@
         user-select: text;
         cursor: text;
         background-color: #efefef;
-    }
-
-    &_buttons {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        flex-wrap: wrap;
-    }
-    &_button {
-        &:not(:first-child) {
-            margin-left: 10px;
-        }
-        margin-bottom: 10px;
-        line-height: 24px;
-    }
-
-    &_buttonIcon {
-        color: #ffffff;
-        margin-left: 10px;
     }
 }
 
