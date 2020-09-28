@@ -25,6 +25,7 @@ class MenuUser extends React.Component {
         this.props.setMenuState(false)
         this.props.logout()
         this.props.setGuestMenu()
+        this.props.history.push('/')
     }
 
     render () {

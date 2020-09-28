@@ -1,0 +1,26 @@
+.breadcrumbs {
+    display: flex;
+    &_link{
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+
+        i {
+            margin-left: 20px;
+        }
+
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        &:last-child {
+            pointer-events: none;
+            a {
+                color: #484848;
+            }
+            i {
+                display: none;
+            }
+        }
+    }
+}

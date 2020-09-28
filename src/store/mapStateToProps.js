@@ -15,6 +15,11 @@ export default function mapStateToProps (component) {
                 user: state.user.data
             }
         }
+        case 'controlPanel' : return state => {
+            return {
+                user: state.user
+            }
+        }
 
         default: return undefined
     }

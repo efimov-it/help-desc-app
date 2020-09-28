@@ -17,6 +17,11 @@ body {
   padding-top: 80px;
 }
 
+.app {
+  position: relative;
+  min-height: calc(100vh - 80px);
+}
+
 .link {
   border: none;
   background-color: #00000000;
@@ -137,4 +142,9 @@ body {
   tr:last-child td{
     border-bottom: none;
   }
+}
+.page {
+  max-width: 1920px;
+  margin: 0px auto;
+  padding: 20px;
 }

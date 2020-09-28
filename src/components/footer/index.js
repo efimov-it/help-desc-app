@@ -14,7 +14,7 @@ export default class Footer extends React.Component{
                         МГТУ "Станкин" © {new Date().getFullYear()}
                 </a>
                 <Link className="footer_link link link__white"
-                        to="/license">
+                        to="/license/">
                         Лицензионное соглашение
                 </Link>
                 <a className="footer_link link link__white"

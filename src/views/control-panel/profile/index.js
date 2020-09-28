@@ -1,13 +1,13 @@
 import React from 'react'
 
-class Applications extends React.Component {
+class Profile extends React.Component {
     render () {
         return (
             <>
-                Заявки
+                Профиль
             </>
         )
     }
 }
 
-export default Applications
+export default Profile

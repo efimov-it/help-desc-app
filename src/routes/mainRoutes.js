@@ -9,15 +9,15 @@ export default [
         component: MainPage
     },
     {
-        path: '/license',
+        path: '/license/',
         component: License
     },
     {
-        path: '/control-panel',
+        path: '/control-panel/',
         component: ControlPanel
     },
     {
-        path: '/settings',
+        path: '/settings/',
         component: Settings
     }
 ]

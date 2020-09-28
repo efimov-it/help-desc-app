@@ -19,6 +19,12 @@ import Auth from './views/auth'
 import mainRoutes from './routes/mainRoutes'
 
 class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isReady: false
+    }
+  }
   componentDidMount () {
     const token = localStorage.getItem('token')
     if (token) {
@@ -42,6 +48,9 @@ class App extends React.Component {
               role: resp.user_type,
               post: resp.user_post
           })
+          this.setState({
+            isReady: true
+          })
           switch (resp.user_type) {
               case 0 : return this.props.setAdminMenu()
               case 1 : return this.props.setModeratorMenu()
@@ -52,30 +61,44 @@ class App extends React.Component {
       .catch(err=>{
         this.props.closeModal()
         localStorage.removeItem('token')
-          this.props.createResultModal(err, 'error')
+        this.props.createResultModal(err, 'error')
+        this.setState({
+          isReady: true
+        })
       });
+    }
+    else {
+      this.setState({
+        isReady: true
+      })
     }
   }
 
   render () {
     return (
         <div className="app">
-          <Header />
-          <Switch>
-            {
-              mainRoutes.map(({path, component}, i) => (
-                <Route
-                  exact
-                  path={path}
-                  component={component}
-                  key={i}
-                />
-              ))
-            }
-          </Switch>
-          <Footer />
-          <Menu authView={Auth} />
-          <Modals />
+          {
+            this.state.isReady ?
+              (<>
+                <Header />
+                <Switch>
+                  {
+                    mainRoutes.map(({path, component}, i) => (
+                      <Route
+                        path={path}
+                        component={component}
+                        key={i}
+                        exact={path === '/'}
+                      />
+                    ))
+                  }
+                </Switch>
+                <Footer />
+                <Menu authView={Auth} />
+                <Modals />
+              </>)
+            : <LoadingIndicator />
+          }
         </div>
     )
   }
