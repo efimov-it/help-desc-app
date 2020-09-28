@@ -1,0 +1,12 @@
+.dashboard_cards {
+    width: 100%;
+    display: flex;
+    justify-content: stretch;
+    margin-bottom: 40px;
+
+    > * {
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+    }
+}
