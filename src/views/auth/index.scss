@@ -1,6 +1,7 @@
 .auth-form {
     display: flex;
     flex-direction: column;
+    padding-top: 5px;
 
     & > label > *:not(:last-child) {
         margin-bottom: 5px;

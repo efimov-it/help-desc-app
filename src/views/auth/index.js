@@ -1,9 +1,14 @@
 import React from 'react'
-import Axios from 'axios'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import mapStateToProps from '../../store/mapStateToProps'
+import mapDispatchToProps from '../../store/mapDispatchToProps'
+import Input from '../../components/input'
+import LoadingIndicator from '../../components/loadingIndicator'
 
 import './index.scss'
 
-export default class Auth extends React.Component {
+class Auth extends React.Component {
 
     state = {}
 
@@ -12,99 +17,79 @@ export default class Auth extends React.Component {
 
         this.state = {
             login: '',
-            password: ''
+            password: '',
+            buttonDisabled: true
         }
-
-        this.onChangeLogin = this.onChangeLogin.bind(this)
-        this.onChangePassword = this.onChangePassword.bind(this)
-        this.submit = this.submit.bind(this)
     }
 
-    onChangeLogin (e) {
-        this.setState({
-            login: e.target.value
-        })
-    }
-    onChangePassword (e) {
-        this.setState({
-            password: e.target.value
+    onChange (e) {
+        const state = {}
+        state[e.target.name] = e.target.value
+        this.setState(state, ()=>{
+            this.setState({
+                buttonDisabled: this.state.login === "" || this.state.password === ""
+            })
         })
     }
 
 
     submit (e) {
         e.preventDefault()
-
-        if (!this.state.login || !this.state.password) {
-            this.props.modalError('Вы не указали логин или пароль.')
-            return
-        }
-
-        Axios({
-            method: 'POST',
-            url: global.apiUrl + '/login/',
-            data: 'login='+this.state.login+'&password='+this.state.password
-        }).then((data)=>{
-            const response = data.data
-            if(response.status === "success") {
-                localStorage.setItem('token', response.data.token)
-                localStorage.setItem('expiresIn', response.data.expires_in)
-                this.props.modalSubmit(this.props.modalId, {
-                    func: 'auth'
-                });
-            }
-            else {
-                switch (response.message) {
-                    case 'Invalid login or password':
-                        this.props.modalError('Неверно указан логин или пароль.')
-                    break;
-                    case 'Data base error':
-                        this.props.modalError('Ошибка базы данных. Пожалуйста, сообщите о проблеме системному администратору.')
-                    break;
-                    case 'login is empty':
-                        this.props.modalError('Вы не указали логин.')
-                    break;
-                    case 'password is empty':
-                        this.props.modalError('Вы не указали пароль.')
-                    break;
-
-                    default:
-                        this.props.modalError('Произошла сетевая ошибка. Перезапустите страницу и попробуйте снова.')
-                    break;
-                }
-            }
+        this.props.createModal({
+            content: LoadingIndicator
         })
-        .catch((errr)=>{
-            console.log(errr);
-            this.props.modalError('Произошла сетевая ошибка. Перезапустите страницу и попробуйте снова.')
+        global.sendRequest({
+            method: 'POST',
+            url: '/login/',
+            data: 'login='+this.state.login+'&password='+this.state.password
+        }).then(resp=>{
+            this.props.closeModal()
+            this.props.closeModal()
+            localStorage.setItem('token', resp.token)
+            localStorage.setItem('expiresIn', resp.expires_in)
+            this.props.history.push('/control-panel/')
+        })
+        .catch(err=>{
+            this.props.closeModal()
+            this.props.createResultModal(err, 'error')
         });
     }
 
     render () {
         return (
-            <form action="" className="auth-form">
-                <label>
-                    <p className="form-text">Логин:</p>
-                    <input className="input"
-                        type="text"
-                        name="login"
-                        value={this.state.login}
-                        onChange={this.onChangeLogin}
-                        required/>
-                </label>
-                <label>
-                    <p className="form-text">Пароль:</p>
-                    <input className="input"
-                        type="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.onChangePassword}
-                        required/>
-                </label>
-                <button type="submit"
-                        className="button"
-                        onClick={this.submit}>Войти</button>
+            <form
+                action=""
+                className="auth-form"
+            >
+                <Input
+                    type="text"
+                    name="login"
+                    placeholder="Логин"
+                    value={this.state.login}
+                    onChange={(e)=>this.onChange.apply(this, [e])}
+                    required
+                />
+                <Input
+                    type="password"
+                    name="password"
+                    placeholder="Пароль"
+                    value={this.state.password}
+                    onChange={(e)=>this.onChange.apply(this, [e])}
+                    required
+                />
+                <button
+                    type="submit"
+                    className="button"
+                    onClick={(e)=>this.submit.apply(this, [e])}
+                    disabled={this.state.buttonDisabled}
+                    title={this.state.buttonDisabled ? "Заполните все поля." : "Войти в панель управления."}
+                >Войти</button>
             </form>
         )
     }
 }
+
+export default connect(
+    mapStateToProps('auth'),
+    mapDispatchToProps('auth')
+)(withRouter(Auth))

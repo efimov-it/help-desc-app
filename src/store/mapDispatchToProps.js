@@ -12,6 +12,7 @@ export default function mapDispatchToProps (component) {
                 setModeratorMenu: bindActionCreators(menuActionsCreator.setModeratorMenu, dispatch),
                 setUserMenu:      bindActionCreators(menuActionsCreator.setUserMenu, dispatch),
                 setMenuState:     bindActionCreators(menuActionsCreator.setMenuState, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
             }
         }
@@ -51,6 +52,14 @@ export default function mapDispatchToProps (component) {
         }
 
         case 'applicationSendCode' : return dispatch => {
+            return {
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
+            }
+        }
+
+        case 'auth' : return dispatch => {
             return {
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),

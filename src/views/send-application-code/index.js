@@ -39,6 +39,9 @@ class SendApplicationCode extends React.Component {
                 </h2>
                 <p className="modal-text_headSubtext">Для восстановления доступа к заявкам необходимо ввести адрес электронной почты, который Вы указывали при подаче заявки. Данные по вашим заявкам будут отправлены на указанный адрес электронной почты.</p>
                 <Input
+                    type="text"
+                    name="mail"
+                    required
                     placeholder="Электронная почта"
                 />
                 <div className="modal_buttons">
