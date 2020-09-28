@@ -10,7 +10,7 @@ class SendApplicationCode extends React.Component {
         e.preventDefault()
         e.persist()
         const mail = e.target[0].value
-        if (mail == '') return this.props.createResultModal('Вы не указали адрес электронной почты.', 'error')
+        if (mail === '') return this.props.createResultModal('Вы не указали адрес электронной почты.', 'error')
         this.props.createModal({
             content: LoadingIndicator
         })

@@ -46,6 +46,7 @@ class App extends React.Component {
               case 0 : return this.props.setAdminMenu()
               case 1 : return this.props.setModeratorMenu()
               case 2 : return this.props.setUserMenu()
+              default : return this.props.setGuestMenu()
           }
       })
       .catch(err=>{

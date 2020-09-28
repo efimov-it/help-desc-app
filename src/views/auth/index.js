@@ -64,12 +64,13 @@ class Auth extends React.Component {
                 role: resp.user_type,
                 post: resp.user_post
             })
+            this.props.history.push('/control-panel/')
             switch (resp.user_type) {
                 case 0 : return this.props.setAdminMenu()
                 case 1 : return this.props.setModeratorMenu()
                 case 2 : return this.props.setUserMenu()
+                default : return this.props.setGuestMenu()
             }
-            this.props.history.push('/control-panel/')
         })
         .catch(err=>{
             this.props.closeModal()
