@@ -5,6 +5,12 @@
     padding: 20px;
     min-height: 150px;
     overflow: hidden;
+    transition: transform .3s ease-in-out;
+
+    &:hover {
+        animation: dashboard-card-hover .5s ease-in-out;
+        transform: scale(1.03);
+    }
 
     &::after {
         content: '';
