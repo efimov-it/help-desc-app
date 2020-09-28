@@ -2,6 +2,7 @@ import {bindActionCreators} from 'redux'
 
 import menuActionsCreator from './actionsCreators/menu'
 import modalsActionsCreator from './actionsCreators/modal'
+import userActionsCreator from './actionsCreators/user'
 
 export default function mapDispatchToProps (component) {
     switch (component) {
@@ -63,7 +64,8 @@ export default function mapDispatchToProps (component) {
             return {
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
-                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch)
+                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                login: bindActionCreators(userActionsCreator.login, dispatch)
             }
         }
 

@@ -47,6 +47,7 @@ class Auth extends React.Component {
             this.props.closeModal()
             localStorage.setItem('token', resp.token)
             localStorage.setItem('expiresIn', resp.expires_in)
+            this.props.login(resp.token, resp.expires_in)
             this.props.history.push('/control-panel/')
         })
         .catch(err=>{
