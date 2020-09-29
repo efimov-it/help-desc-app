@@ -1,0 +1,97 @@
+.application {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(#000000, .05);
+
+    &_code {
+        font-size: 28px;
+        font-weight: bold;
+        user-select: text;
+        padding: 20px;
+        margin: -20px -20px 20px -20px;
+        border-bottom: 1px solid #eaeaea;
+
+        &::before {
+            content: '#';
+        }
+        
+        @media (max-width: 500px) {
+            font-size: 22px;
+        }
+    }
+
+    &_info{
+        margin-bottom: 20px;
+        height: 100%;
+        overflow: hidden;
+
+        &Table {
+            tr {
+                td:first-child{
+                    font-weight: bold;
+                    width: 150px;
+                    height: 25px;
+                }
+            }
+
+            @media (max-width: 500px) {
+                font-size: 12px;
+                tr {
+                    td:first-child{
+                        font-weight: bold;
+                        width: 120px;
+                        height: 20px;
+                    }
+                }
+            }
+        }
+    }
+
+    &_message {
+        max-width: 80%;
+        padding: 20px;
+        background: linear-gradient(90deg, #03a9f4, #00bcd5);
+        border-radius: 32px 32px 32px 10px;
+        margin-bottom: 20px;
+    }
+
+    &_text {
+        color: #ffffff;
+        font-size: 18px;
+        margin-bottom: 10px;
+        user-select: text;
+        
+        @media (max-width: 500px) {
+            font-size: 14px;
+        }
+    }
+
+    &_date {
+        text-align: right;
+        color: #ffffff;
+        opacity: .7;
+        
+        @media (max-width: 500px) {
+            font-size: 11px;
+        }
+    }
+
+    &_events {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    &_event {
+        background: none;
+        font-size: 16px;
+        margin: 0px 10px 10px 0px;
+        border: 2px solid #03a9f4;
+        padding: 10px;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+}

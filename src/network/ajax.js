@@ -3,12 +3,12 @@ import errors from './errors.json'
 
 const baseUrl = process.env.NODE_ENV === 'production' ?
                                         'https://help.stankin.ru/api/v1' :
-                                        'http://help.stankin.local/api/v1';
+                                        'http://192.168.0.150/api/v1';
 
 export default function ({
     url,
     method = 'GET',
-    data = {},
+    data = '',
     headers = {}
 }) {
     const isInnerRequest = url.indexOf('http') !== 0

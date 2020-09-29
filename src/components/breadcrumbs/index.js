@@ -46,10 +46,12 @@ class Breadcrumbs extends React.Component {
             <div className="breadcrumbs controlPanelBlock">
                 {
                     this.state.breadcrumbs.map(({path, name}, i) => 
-                        <div className="breadcrumbs_link">
+                        <div
+                            className="breadcrumbs_link"
+                            key={i}
+                        >
                             <Link
                                 to={path}
-                                key={i}
                                 className="link"
                             >
                                 {name}

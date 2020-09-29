@@ -1,12 +1,109 @@
 .dashboard_cards {
     width: 100%;
     display: flex;
-    justify-content: stretch;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin-bottom: 40px;
 
     > * {
+        width: calc(calc(100% / 3) - 40px);
         &:not(:last-child) {
             margin-right: 40px;
         }
+
+        @media (max-width: 1000px) {
+            width: calc(calc(100% / 2) - 40px);
+            &:not(:last-child) {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 750px) {
+            width: 100%;
+
+            &:not(:last-child) {
+                margin: 0px 0px 40px 0px;
+            }
+        }
+    }
+}
+
+.dashboardUser {
+    width: 100%;
+    display: flex;
+    
+    &_text {
+        width: 100%;
+
+        p {
+            color: #ffffff;
+            text-shadow: 2px 2px 2px rgba(#000000, .1);
+        }
+    }
+
+    &_fullname {
+        font-size: 28px;
+        letter-spacing: 1.5px;
+        line-height: 26px;
+        margin-bottom: 10px;
+    }
+    &_post {
+        font-size: 22px;
+    }
+    &_button {
+        background: none;
+        border: none;
+        font-size: 48px;
+        color: #ffffff;
+        cursor: pointer;
+        transition: opacity .3s ease-in-out;
+        &:hover {
+            opacity: .8;
+        }
+    }
+
+    @media (max-width: 350px) {
+
+        &_fullname {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+        &_post {
+            font-size: 18px;
+        }
+    }
+}
+
+.dashboardApplications {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    width: 100%;
+
+    &_counter {
+        color: #ffffff;
+        font-size: 90px;
+        margin: 0px 10px 0px 20px;
+        text-shadow: 2px 2px 2px rgba(#000000, .2);
+    }
+
+    &_text {
+        width: 100%;
+        color: #ffffff;
+        font-size: 24px;
+        text-align: center;
+        text-shadow: 2px 2px 2px rgba(#000000, .2);
+    }
+}
+.dashboardSettings {
+    &_header {
+        color: #ffffff;
+        font-size: 24px;
+        margin-bottom: 5px;
+        text-shadow: 2px 2px 2px rgba(#000000, .2);
+    }
+    &_text {
+        color: #ffffff;
+        text-shadow: 2px 2px 2px rgba(#000000, .2);
     }
 }

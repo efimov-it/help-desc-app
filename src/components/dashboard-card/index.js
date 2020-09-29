@@ -15,7 +15,9 @@ export default class DashboardCard extends React.Component {
                 }}
             >
                 <div className="dashboard-card_icon material-icons">{this.props.icon}</div>
-                {/* <Children /> */}
+                <div className="dashboard-card_content">
+                    {this.props.children}
+                </div>
             </Link>
         )
     }

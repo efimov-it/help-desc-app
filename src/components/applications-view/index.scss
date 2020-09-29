@@ -1,0 +1,173 @@
+.applicationsView {
+    &_tools {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 10px 20px rgba(#000000, 0.05);
+    
+        &More {
+            border: none;
+            background: none;
+            color: #03a9f4;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: underline;
+
+            @media (min-width: 1001px) {
+                display: none;
+            }
+        }
+
+        &__hidden {
+            @media (max-width: 1000px) {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            flex-direction: column;
+
+            & > *:not(:last-child) {
+                margin: 0px 0px 20px 0px;
+            }
+        }
+    }
+
+    &_search {
+        display: flex;
+        width: 100%;
+        margin-right: 20px;
+
+        &Box {
+            width: 100%;
+            margin-right: 10px;
+            border: none;
+            border-bottom: 2px solid #acacac;
+            font-size: 16px;
+            transition: .3s ease-in-out;
+
+            &:focus, &:not([value=""]){
+                border-color: #03a9f4;
+                &::placeholder {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+            }
+
+            &::placeholder {
+                font-style: italic;
+                transition: .3s ease-in-out;
+            }
+        }
+
+        &Button {
+            background: none;
+            border: none;
+            font-size: 32px;
+            cursor: pointer;
+            transition: color .3s ease-in-out;
+            &:hover {
+                color: #03a9f4;
+            }
+        }
+    }
+
+    &_sort {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+
+        &By {
+            padding: 10px;
+            border: 2px solid #acacac;
+            border-radius: 10px;
+            margin-right: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        &Direction {
+            border: none;
+            background: none;
+            min-width: 40px;
+            min-height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background .3s ease-in-out;
+
+            &__active {
+                background-color: #dedede;
+            }
+
+            &:hover {
+                background-color: #efefef;
+            }
+
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            width: 100%;
+
+            &By {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            flex-wrap: wrap;
+
+            &By {
+                margin: 0px 0px 10px 0px;
+            }
+        }
+    }
+
+    &_date {
+        border: 2px solid #acacac;
+        padding: 10px 10px 10px 20px;
+        border-radius: 10px;
+        cursor: text;
+
+        &Input {
+            background: none;
+            border: none;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        @media (max-width: 1000px) {
+            width: 100%;
+
+            &::before{
+                content: 'Дата подачи:';
+                position: absolute;
+                background-color: #ffffff;
+                transform: translateY(-22px);
+                padding: 0px 10px;
+                margin-left: -10px;
+            }
+        }
+    }
+
+    &_wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    &_application {
+        width: calc(50% - 20px);
+        margin-bottom: 40px;
+
+        @media (max-width: 1000px) {
+            width: 100%;
+        }
+    }
+}

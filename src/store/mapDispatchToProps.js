@@ -94,6 +94,20 @@ export default function mapDispatchToProps (component) {
             }
         }
 
+        case 'controlPanelMain' : return dispatch => {
+            return {
+                logout: bindActionCreators(userActionsCreator.logout, dispatch),
+                setGuestMenu: bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+            }
+        }
+
+        case 'applicationView' : return dispatch => {
+            return {
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+            }
+        }
+
         default: return undefined
     }
 }

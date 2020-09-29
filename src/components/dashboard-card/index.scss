@@ -3,9 +3,10 @@
     width: 100%;
     border-radius: 32px;
     padding: 20px;
-    min-height: 150px;
+    height: 150px;
     overflow: hidden;
     transition: transform .3s ease-in-out;
+    text-decoration: none;
 
     &:hover {
         animation: dashboard-card-hover .5s ease-in-out;
@@ -45,8 +46,16 @@
     &_icon {
         position: absolute;
         color: #ffffff;
-        opacity: .5;
+        opacity: .3;
         font-size: 220px;
         margin: -20px 0px 0px -70px;
+    }
+
+    &_content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        height: 100%;
     }
 }
