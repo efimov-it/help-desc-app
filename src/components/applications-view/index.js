@@ -4,6 +4,7 @@ import mapStateToProps from '../../store/mapStateToProps'
 import mapDispatchToProps from '../../store/mapDispatchToProps'
 import './index.scss'
 import ApplicationCard from './application-card'
+import LoadingIndicator from '../loadingIndicator'
 
 class ApplicationsView extends React.Component {
     constructor (props) {
@@ -18,6 +19,7 @@ class ApplicationsView extends React.Component {
                 date: '',
                 page: 1
             },
+            loading: false,
             applications: [],
             pagination: {
                 total: null,
@@ -65,6 +67,10 @@ class ApplicationsView extends React.Component {
     initSearch (e) {
         if(e) e.preventDefault()
 
+        this.setState({
+            loading: true
+        })
+
         let url = this.props.state === 'created' ?
                             '/applications/' :
                             this.props.state === 'processing' ?
@@ -89,6 +95,9 @@ class ApplicationsView extends React.Component {
             }
         })
         .then(resp=>{
+            this.setState({
+                loading: false
+            })
             let applications = []
 
             if (searchValues.page === 1) {
@@ -102,12 +111,28 @@ class ApplicationsView extends React.Component {
             }
 
             this.setState({
-                applications
+                applications,
+                pagination: {
+                    total: parseInt(resp.pagination.tottal_count),
+                    loaded: parseInt(resp.pagination.loaded_count),
+                    next: parseInt(resp.pagination.next_page_count)
+                }
             })
         })
         .catch(err=>{
+            this.setState({
+                loading: false
+            })
             this.props.createResultModal(err, 'error')
         })
+    }
+
+    nextPage () {
+        const {searchValues} = this.state
+        searchValues.page++
+        this.setState({
+            searchValues
+        }, this.initSearch)
     }
 
     render () {
@@ -194,6 +219,28 @@ class ApplicationsView extends React.Component {
                                     onApplicationStateChange={()=>this.initSearch.apply(this)}
                                 />
                             ) : ''
+                    }
+                    {
+                        this.state.applications.length > 0 ?
+                        <div className="applicationsView_paginationWrapper">
+                            <div className="applicationsView_pagination">
+                                {
+                                    this.state.loading === true && this.state.searchValues.page > 1 ?
+                                    <LoadingIndicator /> :
+                                    <>
+                                        <p className="applicationsView_paginationText">Заявок загружено: {this.state.pagination.loaded}</p>
+                                        <p className="applicationsView_paginationText">Всего: {this.state.pagination.total}</p>
+                                        {
+                                            this.state.pagination.next > 0 ?
+                                                <div
+                                                    className="button"
+                                                    onClick={()=>this.nextPage.apply(this)}
+                                                >Загрузить ещё {this.state.pagination.next}</div> : ''
+                                        }
+                                    </>
+                                }
+                            </div>
+                        </div> : ''
                     }
                 </div>
             </>
