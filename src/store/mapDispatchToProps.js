@@ -108,6 +108,30 @@ export default function mapDispatchToProps (component) {
             }
         }
 
+        case 'applicationCard' : return dispatch => {
+            return {
+                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+            }
+        }
+
+        case 'applicationEnd' : return dispatch => {
+            return {
+                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+            }
+        }
+
+        case 'applicationSetExecutor' : return dispatch => {
+            return {
+                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+            }
+        }
+
         default: return undefined
     }
 }

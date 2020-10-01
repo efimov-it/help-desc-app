@@ -26,6 +26,12 @@ export default function mapStateToProps (component) {
             }
         }
 
+        case 'applicationCard' : return state => {
+            return {
+                user: state.user
+            }
+        }
+
         default: return undefined
     }
 }

@@ -124,5 +124,8 @@
     },
     "Invalid value of user_post" : {
         "RU-ru" : "Некорректное название должности."
+    },
+    "The application has already been completed" : {
+        "RU-ru" : "Заявка уже завершена."
     }
 }

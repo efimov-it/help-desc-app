@@ -50,32 +50,122 @@
         }
     }
 
+    &_messages {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        // overflow: hidden;
+    }
     &_message {
+        display: inline-block;
         max-width: 80%;
+        min-width: 40%;
         padding: 20px;
         background: linear-gradient(90deg, #03a9f4, #00bcd5);
         border-radius: 32px 32px 32px 10px;
-        margin-bottom: 20px;
-    }
+        animation: message-create .5s ease-in-out;
 
-    &_text {
-        color: #ffffff;
-        font-size: 18px;
-        margin-bottom: 10px;
-        user-select: text;
-        
-        @media (max-width: 500px) {
-            font-size: 14px;
+        @keyframes message-create {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0px);
+            }
         }
-    }
 
-    &_date {
-        text-align: right;
-        color: #ffffff;
-        opacity: .7;
-        
+        &__auth {
+            border-radius: 32px 32px 10px 32px;
+            float: right;
+            background: linear-gradient(90deg, #ff9f01, #ff5822);
+            animation: message-create__auth .5s ease-in-out;
+            
+            @keyframes message-create__auth {
+                0% {
+                    opacity: 0;
+                    transform: translateX(50px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0px);
+                }
+            }
+        }
+
+        &Wrapper {
+            margin-bottom: 10px;
+        }
+
+        &Sender {
+            border-top: 1px solid #eaeaea;
+            margin: 0px -20px -20px -20px;
+            padding: 10px 20px 20px 20px;
+            display: flex;
+            align-items: center;
+        }
+        &Input {
+            border: 2px solid #eaeaea;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            width: 100%;
+            margin-right: 10px;
+            transition: border-color .3s ease-in-out;
+
+            &:focus, &:not([value=""]) {
+                border-color: #03a9f4;
+            }
+        }
+        &SendButton {
+            background: none;
+            border: none;
+            color: #03a9f4;
+            cursor: pointer;
+            font-size: 38px;
+        }
+
         @media (max-width: 500px) {
-            font-size: 11px;
+            &Input {
+                font-size: 12px;
+                border-width: 1px;
+            }
+            &SendButton {
+                font-size: 32px;
+            }
+        }
+    
+        &Owner {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            
+            @media (max-width: 500px) {
+                font-size: 14px;
+            }
+        }
+    
+        &Text {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 10px;
+            user-select: text;
+            
+            @media (max-width: 500px) {
+                font-size: 14px;
+            }
+        }
+        
+        &Date {
+            text-align: right;
+            color: #ffffff;
+            opacity: .7;
+            
+            @media (max-width: 500px) {
+                font-size: 11px;
+            }
         }
     }
 
@@ -90,8 +180,25 @@
         font-size: 16px;
         margin: 0px 10px 10px 0px;
         border: 2px solid #03a9f4;
-        padding: 10px;
+        padding: 10px 20px;
         border-radius: 30px;
         cursor: pointer;
+        text-decoration: none;
+        transition: .3s ease-in-out;
+
+        &:last-child {
+            margin-right: 0px;
+        }
+
+        &:hover {
+            background: #03a9f4;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        @media (max-width: 500px) {
+            border-width: 1px;
+            font-size: 12px;
+        }
     }
 }

@@ -121,9 +121,14 @@ class ApplicationStatus extends React.Component {
                     </h2>
 
                     <div className="application-status_text">
-                        <strong>Текст заявки: </strong> {this.state.applicationText}
+                        <strong>Текст заявки: </strong> <p dangerouslySetInnerHTML={{__html:this.state.applicationText}} />
                     </div>
-                    
+                    {
+                        this.state.resultText ?
+                        <div className="application-status_text">
+                            <strong>Итог обращения: </strong> <p dangerouslySetInnerHTML={{__html:this.state.resultText}} />
+                        </div> : ''
+                    }
                     {
                         this.state.supportFullname ? 
                             <div className="application-status_executors">
@@ -164,27 +169,30 @@ class ApplicationStatus extends React.Component {
                         : ''
                     }
 
-                    <form
-                        className="application-status_message"
-                        action=""
-                        onSubmit={e=>this.sendMessage.apply(this, [e])}
-                    >
-                        <p className="application-status_message-text">
-                            Вы можете написать сообщение, например если появились обновления по Вашей проблеме.
-                        </p>
-                        <textarea
-                            className="application-status_message-textarea input input-area"
-                            placeholder="Текст собщения"
-                            name="message"
-                            title="Сообщение отобразится у исполнителя и оператора заявки."
-                        ></textarea>
-                        <button 
-                            type="submit"
-                            className="button"
+                    {
+                        this.state.status !== 'completed' ?
+                        <form
+                            className="application-status_message"
+                            action=""
+                            onSubmit={e=>this.sendMessage.apply(this, [e])}
                         >
-                            Отправить
-                        </button>
-                    </form>
+                            <p className="application-status_message-text">
+                                Вы можете написать сообщение, например если появились обновления по Вашей проблеме.
+                            </p>
+                            <textarea
+                                className="application-status_message-textarea input input-area"
+                                placeholder="Текст собщения"
+                                name="message"
+                                title="Сообщение отобразится у исполнителя и оператора заявки."
+                            ></textarea>
+                            <button 
+                                type="submit"
+                                className="button"
+                            >
+                                Отправить
+                            </button>
+                        </form> : ''
+                    }
                 </ScrollBar>
             </div>
         )

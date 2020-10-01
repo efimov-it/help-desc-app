@@ -1,0 +1,51 @@
+.applicationExecutor {
+    max-height: 600px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+
+    &_executor {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        cursor: pointer;
+        border: 2px solid #eaeaea;
+        border-radius: 10px;
+        transition: background .3s ease-in-out;
+
+        &:hover {
+            background: #eaeaea;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+
+    &_input {
+        display: none;
+
+        &:checked + .applicationExecutor_content::before {
+            background-color: #03a9f4;
+            border-color: #03a9f4;
+        }
+    }
+
+    &_content {
+        display: flex;
+        align-items: center;
+
+        &::before {
+            content: '';
+            min-width: 20px;
+            min-height: 20px;
+            max-width: 20px;
+            max-height: 20px;
+            display: block;
+            border: 2px solid #eaeaea;
+            background: #ffffff;
+            border-radius: 14px;
+            margin-right: 10px;
+            transition: .3s ease-in-out;
+        }
+    }
+}

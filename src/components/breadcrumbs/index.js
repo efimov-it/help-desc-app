@@ -26,10 +26,20 @@ class Breadcrumbs extends React.Component {
             const breadcrumbs = []
             paths.forEach(path=>{
                 if (path !== '') {
-                    breadcrumbs.push({
-                        name: routes[path],
-                        path: '/'+path+'/'
-                    })
+                    const lastPath = breadcrumbs.length > 0 ? breadcrumbs[breadcrumbs.length - 1].path : '/'
+                    if (routes[path]) {
+                        breadcrumbs.push({
+                            name: routes[path],
+                            path: lastPath+path+'/'
+                        })
+                    }
+                    else {
+                        const name = breadcrumbs[breadcrumbs.length - 1].name === 'Мои заявки' ? 'Заявка #'+path : path
+                        breadcrumbs.push({
+                            name: name,
+                            path: '/'+path+'/'
+                        })
+                    }
                 }
             })
             this.setState({

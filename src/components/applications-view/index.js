@@ -67,7 +67,7 @@ class ApplicationsView extends React.Component {
 
         let url = this.props.state === 'created' ?
                             '/applications/' :
-                            this.props.state === 'processed' ?
+                            this.props.state === 'processing' ?
                                         '/applications/my/' :
                                         '/applications/completed/'
 
@@ -190,6 +190,8 @@ class ApplicationsView extends React.Component {
                                     className="applicationsView_application"
                                     key={i}
                                     data={application}
+                                    state={this.props.state}
+                                    onApplicationStateChange={()=>this.initSearch.apply(this)}
                                 />
                             ) : ''
                     }
