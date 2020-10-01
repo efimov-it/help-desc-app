@@ -1,0 +1,21 @@
+.applicationEmptyList {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0px;
+
+    &_img {
+        max-width: 90vw;
+        margin-bottom: 30px;
+        user-select: none;
+    }
+
+    &_text {
+        font-size: 32px;
+
+        @media (max-width: 700px) {
+            font-size: 22px;
+        }
+    }
+}

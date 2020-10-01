@@ -1,5 +1,10 @@
 .breadcrumbs {
     display: flex;
+
+    &_back {
+        display: none;
+    }
+
     &_link{
         display: flex;
         align-items: center;
@@ -19,6 +24,31 @@
                 color: #484848;
             }
             i {
+                display: none;
+            }
+        }
+    }
+
+    @media (max-width: 700px) {
+        &_back {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            font-size: 28px;
+    
+            &::after {
+                content: 'Назад';
+                font-size: 11px;
+            }
+        }
+
+        &_link {
+            &:last-child {
+                margin: 0px auto;
+            }
+            &:not(:last-child) {
                 display: none;
             }
         }

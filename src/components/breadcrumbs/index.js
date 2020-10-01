@@ -51,9 +51,19 @@ class Breadcrumbs extends React.Component {
             setBreadcrumbs()
         })
     }
+    back () {
+        this.props.history.push(this.state.breadcrumbs[this.state.breadcrumbs.length - 2].path)
+    }
     render () {
         return (
             <div className="breadcrumbs controlPanelBlock">
+                {
+                    this.state.breadcrumbs.length > 1 ?
+                    <button
+                        className="breadcrumbs_back material-icons"
+                        onClick={()=>this.back.apply(this)}
+                    >keyboard_backspace</button> : ''
+                }
                 {
                     this.state.breadcrumbs.map(({path, name}, i) => 
                         <div

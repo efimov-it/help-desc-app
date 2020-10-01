@@ -13,6 +13,11 @@ import LoadingIndicator from '../../loadingIndicator'
 class ApplicationCard extends React.Component {
     constructor (props) {
         super (props)
+
+        this.state = {
+            newMessage: '',
+            messages: []
+        }
     }
 
     endApplication () {
@@ -83,6 +88,44 @@ class ApplicationCard extends React.Component {
 
     changeApplicationState () {
         this.props.onApplicationStateChange()
+    }
+
+    changeNewMessage (e) {
+        this.setState ({
+            newMessage: e.target.value
+        })
+    }
+
+    sendMessage (e) {
+        e.preventDefault()
+        e.persist()
+        const message = this.state.newMessage
+        this.setState({
+            newMessage: ''
+        })
+        if (message !== '') {
+            global.sendRequest({
+                url: '/applications/message/',
+                method: 'post',
+                headers: {
+                    token: this.props.user.token
+                },
+                data: 'key=' + this.props.data.application_code + '&message=' + message
+            })
+            .then(resp=>{
+                const {messages} = this.state
+                messages.push({
+                    text: message,
+                    date: new Date()
+                })
+                this.setState({
+                    messages
+                })
+            })
+            .catch(err=>{
+                this.props.createResultModal(err, 'error')
+            })
+        }
     }
 
     render () {
@@ -156,18 +199,45 @@ class ApplicationCard extends React.Component {
                     </div>
 
                     <div className="application_messageWrapper">
-                        <div className="application_message application_message__auth">
-                            <div className="application_messageOwner">
-                                {"Иванов Иван Иванович (Модератор)"}
-                            </div>
-                            <div className="application_messageText">
-                                {"Последний ответ от тех. поддержки"}
-                            </div>
-                            <div className="application_messageDate">
-                                {new Date(data.date).toLocaleTimeString(global.lang) + ' ' +
-                                new Date(data.date).toLocaleDateString(global.lang)}
-                            </div>
-                        </div>
+                        {
+                            data.last_message !== null ?
+                                <div className="application_message application_message__auth">
+                                    <div className="application_messageOwner">
+                                        {data.last_message.full_name + " (" + 
+                                            (data.last_message.user_type === 0 ? 'Администратор' : data.last_message.user_type === 1 ? 'Модератор' : 'Сотрудник') +
+                                            ")"}
+                                    </div>
+                                    <div className="application_messageText">
+                                        {data.last_message.text}
+                                    </div>
+                                    <div className="application_messageDate">
+                                        {new Date(data.last_message.date).toLocaleTimeString(global.lang) + ' ' +
+                                        new Date(data.last_message.date).toLocaleDateString(global.lang)}
+                                    </div>
+                                </div>
+                            : ''
+                        }
+                        {
+                            this.state.messages.map((message, i) =>
+                            data.last_message !== null ? (
+                                message.date.getTime() > new Date(data.last_message.date).getTime()) : true ?
+                                <div
+                                    className="application_message application_message__auth"
+                                    key={i}
+                                >
+                                    <div className="application_messageOwner">
+                                        Вы
+                                    </div>
+                                    <div className="application_messageText">
+                                        {message.text}
+                                    </div>
+                                    <div className="application_messageDate">
+                                        {message.date.toLocaleTimeString(global.lang) + ' ' +
+                                            message.date.toLocaleDateString(global.lang)}
+                                    </div>
+                                </div> : ''
+                            )
+                        }
                     </div>
                 </div>
 
@@ -215,16 +285,18 @@ class ApplicationCard extends React.Component {
                 </div>
                 
                 {
-                    userData.role !== 2 || this.props.state === 'processing' ?
+                    userData.role !== 2 && this.props.state === 'created' ?
                     <form
                         className="application_messageSender"
                         action=""
+                        onSubmit={e=>this.sendMessage.apply(this, [e])}
                     >
                         <input
                             className="application_messageInput"
                             placeholder="Написать сообщение заявителю..."
                             title="Текстовое поле для ввода сообщения."
-                            value=""
+                            value={this.state.newMessage}
+                            onChange={e=>this.changeNewMessage.apply(this, [e])}
                         />
                         <button
                             className="application_messageSendButton material-icons"

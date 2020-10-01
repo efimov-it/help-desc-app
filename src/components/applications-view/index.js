@@ -5,6 +5,7 @@ import mapDispatchToProps from '../../store/mapDispatchToProps'
 import './index.scss'
 import ApplicationCard from './application-card'
 import LoadingIndicator from '../loadingIndicator'
+import ApplicationEmptyList from './application-emptyList'
 
 class ApplicationsView extends React.Component {
     constructor (props) {
@@ -20,7 +21,7 @@ class ApplicationsView extends React.Component {
                 page: 1
             },
             loading: false,
-            applications: [],
+            applications: null,
             pagination: {
                 total: null,
                 loaded: null,
@@ -207,42 +208,48 @@ class ApplicationsView extends React.Component {
                     </button>
                 </form>
 
-                <div className="applicationsView_wrapper">
-                    {
-                        this.state.applications.length > 0 ?
-                            this.state.applications.map((application, i) => 
-                                <ApplicationCard
-                                    className="applicationsView_application"
-                                    key={i}
-                                    data={application}
-                                    state={this.props.state}
-                                    onApplicationStateChange={()=>this.initSearch.apply(this)}
-                                />
-                            ) : ''
-                    }
-                    {
-                        this.state.applications.length > 0 ?
-                        <div className="applicationsView_paginationWrapper">
-                            <div className="applicationsView_pagination">
-                                {
-                                    this.state.loading === true && this.state.searchValues.page > 1 ?
-                                    <LoadingIndicator /> :
-                                    <>
-                                        <p className="applicationsView_paginationText">Заявок загружено: {this.state.pagination.loaded}</p>
-                                        <p className="applicationsView_paginationText">Всего: {this.state.pagination.total}</p>
+                {
+                    this.state.applications === null ?
+                    <LoadingIndicator /> :
+                    this.state.applications.length !== 0 ?
+                        <div className="applicationsView_wrapper">
+                            {
+                                this.state.applications.length > 0 ?
+                                    this.state.applications.map((application, i) => 
+                                        <ApplicationCard
+                                            className="applicationsView_application"
+                                            key={i}
+                                            data={application}
+                                            state={this.props.state}
+                                            onApplicationStateChange={()=>this.initSearch.apply(this)}
+                                        />
+                                    ) : ''
+                            }
+                            {
+                                this.state.applications.length > 0 ?
+                                <div className="applicationsView_paginationWrapper">
+                                    <div className="applicationsView_pagination">
                                         {
-                                            this.state.pagination.next > 0 ?
-                                                <div
-                                                    className="button"
-                                                    onClick={()=>this.nextPage.apply(this)}
-                                                >Загрузить ещё {this.state.pagination.next}</div> : ''
+                                            this.state.loading === true && this.state.searchValues.page > 1 ?
+                                            <LoadingIndicator /> :
+                                            <>
+                                                <p className="applicationsView_paginationText">Заявок загружено: {this.state.pagination.loaded}</p>
+                                                <p className="applicationsView_paginationText">Всего: {this.state.pagination.total}</p>
+                                                {
+                                                    this.state.pagination.next > 0 ?
+                                                        <div
+                                                            className="button"
+                                                            onClick={()=>this.nextPage.apply(this)}
+                                                        >Загрузить ещё {this.state.pagination.next}</div> : ''
+                                                }
+                                            </>
                                         }
-                                    </>
-                                }
-                            </div>
-                        </div> : ''
-                    }
-                </div>
+                                    </div>
+                                </div> : ''
+                            }
+                        </div> :
+                    <ApplicationEmptyList />
+                }
             </>
         )
     }

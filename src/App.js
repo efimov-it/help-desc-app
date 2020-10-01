@@ -93,7 +93,10 @@ class App extends React.Component {
                     ))
                   }
                 </Switch>
-                <Footer />
+                {
+                  this.props.location.pathname === '/' ?
+                  <Footer /> : ''
+                }
                 <Menu authView={Auth} />
                 <Modals />
               </>)
