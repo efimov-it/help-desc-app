@@ -110,4 +110,4 @@ class App extends React.Component {
 export default connect(
   mapStateToProps('app'),
   mapDispatchToProps('app')
-)(withRouter(App));
+)(withRouter(App))

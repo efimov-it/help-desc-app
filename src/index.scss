@@ -10,6 +10,31 @@
   font-family: Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+
+  &::-webkit-scrollbar {
+    width: 10px;
+
+    @media (max-width: 500px) {
+      width: 5px;
+    }
+
+    &-button {
+      display: none;
+    }
+
+    &-track { 
+      background: rgba(#000000, .05);
+    }
+
+    &-thumb {
+      background: rgba(#000000, .05);
+
+      &:hover {
+        background: rgba(#000000, .1);
+      }
+    }
+  }
 }
 
 body {
@@ -147,4 +172,8 @@ body {
   max-width: 1600px;
   margin: 0px auto;
   padding: 20px;
+
+  @media (max-width: 500px) {
+    padding: 10px;
+  }
 }

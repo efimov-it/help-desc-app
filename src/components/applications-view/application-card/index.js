@@ -219,8 +219,7 @@ class ApplicationCard extends React.Component {
                         }
                         {
                             this.state.messages.map((message, i) =>
-                            data.last_message !== null ? (
-                                message.date.getTime() > new Date(data.last_message.date).getTime()) : true ?
+                                message.date.getTime() > new Date(data.last_message.date).getTime() ?
                                 <div
                                     className="application_message application_message__auth"
                                     key={i}
@@ -259,7 +258,7 @@ class ApplicationCard extends React.Component {
                             className="application_event"
                             onClick={e=>this.setApplicationExecutor.apply(this, [e])}
                         >
-                            Назначить
+                            {this.props.state === 'created' ? "Назначить" : "Переназначить"}
                         </button> : ''
                     }
                     {
@@ -273,7 +272,7 @@ class ApplicationCard extends React.Component {
                         </button> : ''
                     }
                     {
-                        this.props.state === 'processing' || this.props.state === 'completed' ?
+                        this.props.state === 'processing' || this.props.state === 'completed' || userData.role < 2 ?
                         <Link
                             className="application_event"
                             title="Перейти на страницу заявки"

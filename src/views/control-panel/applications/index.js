@@ -23,8 +23,9 @@ class Applications extends React.Component {
                 </Route>
                 <Route 
                     path="/control-panel/applications/:key"
-                    component={ApplicationPage}
-                />
+                >
+                    <ApplicationPage />
+                </Route>
             </Switch>
         )
     }
