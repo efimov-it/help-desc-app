@@ -6,41 +6,49 @@ class Messages extends React.Component {
         return (
             <div className={"messages" + (this.props.className ? " " + this.props.className : "")}>
                 {
-                    this.props.messages.map(({fullName, userType, text, date}, i)=>
-                        <div
-                            className="messages_wrapper"
-                            key={i}
-                        >
-                            {
-                                i === this.props.messages.length - 1 ?
-                                <div className="messages_date">
-                                    {date.toLocaleDateString(global.lang)}
-                                </div> : ''
-                            }
-                            {
-                                i < this.props.messages.length - 1 ?
-                                    date.getDate() != this.props.messages[i+1].date.getDate() ?
-                                        <div className="messages_date">
-                                            {date.toLocaleDateString(global.lang)}
-                                        </div> : ''
-                                : ''
-                            }
-                            <div className={"messages_item" + (fullName ? ' messages_item__auth' : '')}>
+                    this.props.messages ?
+                    this.props.messages.length > 0 ?
+                        this.props.messages.map(({fullName, userType, text, date}, i)=>
+                            <div
+                                className="messages_wrapper"
+                                key={i}
+                            >
                                 {
-                                    fullName ?
-                                    <div className="messages_owner">
-                                        {fullName + " (" + userType + ")"}
+                                    i === this.props.messages.length - 1 ?
+                                    <div className="messages_date">
+                                        {date.toLocaleDateString(global.lang)}
                                     </div> : ''
                                 }
-                                <div className="messages_text">
-                                    {text}
-                                </div>
-                                <div className="messages_time">
-                                    {date.toLocaleTimeString(global.lang)}
+                                {
+                                    i < this.props.messages.length - 1 ?
+                                        date.getDate() != this.props.messages[i+1].date.getDate() ?
+                                            <div className="messages_date">
+                                                {date.toLocaleDateString(global.lang)}
+                                            </div> : ''
+                                    : ''
+                                }
+                                <div className={"messages_item" + (fullName ? ' messages_item__auth' : '')}>
+                                    {
+                                        fullName ?
+                                        <div className="messages_owner">
+                                            {fullName + " (" + userType + ")"}
+                                        </div> : ''
+                                    }
+                                    <div className="messages_text">
+                                        {text}
+                                    </div>
+                                    <div className="messages_time">
+                                        {date.toLocaleTimeString(global.lang)}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )
+                        )
+                    : <div className="messages_empty">
+                        Нет сообщений
+                    </div>
+                    : <div className="messages_empty">
+                        Нет сообщений
+                    </div>
                 }
             </div>
         )
