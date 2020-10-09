@@ -47,7 +47,11 @@ class ApplicationPage extends React.Component {
                 date: new Date(resp.date),
                 exectutorFullName: resp.executor_full_name,
                 operatorFullName: resp.operator_full_name,
-                messages: []
+                messages: [],
+                completed: resp.completed ? {
+                               date: new Date(resp.completed.date).toLocaleDateString(global.lang),
+                               resultText: resp.completed.result_text
+                           } : null
             }
 
             if (resp.messages) {
@@ -92,7 +96,7 @@ class ApplicationPage extends React.Component {
                 applicationCode,
                 token: this.props.user.token,
                 onSubmit: () => {
-                    this.props.history.push('/control-panel/')
+                    this.loadData()
                 }
             }
         })
@@ -311,61 +315,74 @@ class ApplicationPage extends React.Component {
 
                             <div className="applicationPage_newMessage">
                                 {
-                                    this.state.showEvents ?
-                                    <div className="applicationPage_events">
-                                        <button
-                                            className="applicationPage_event"
-                                            onClick={()=>this.endApplication.apply(this)}
-                                        >
-                                            Завершить
-                                        </button>
-                                        {
-                                            this.props.user.data.role < 2?
-                                            <button
-                                                className="applicationPage_event"
-                                                onClick={()=>this.setApplicationExecutor.apply(this)}
+                                    !this.state.application.completed ?
+                                        <>
+                                            {
+                                                this.state.showEvents ?
+                                                <div className="applicationPage_events">
+                                                    <button
+                                                        className="applicationPage_event"
+                                                        onClick={()=>this.endApplication.apply(this)}
+                                                    >
+                                                        Завершить
+                                                    </button>
+                                                    {
+                                                        this.props.user.data.role < 2?
+                                                        <button
+                                                            className="applicationPage_event"
+                                                            onClick={()=>this.setApplicationExecutor.apply(this)}
+                                                        >
+                                                            {this.state.application.exectutorFullName ? "Переназначить" : "Назначить"}
+                                                        </button> : ''
+                                                    }
+                                                    {
+                                                        !this.state.application.exectutorFullName ? 
+                                                        <button
+                                                            className="applicationPage_event"
+                                                            onClick={()=>this.getApplication.apply(this)}
+                                                        >
+                                                            Добавить в "Мои заявки"
+                                                        </button> : ''
+                                                    }
+                                                </div> : ''
+                                            }
+
+                                            <form
+                                                className="applicationPage_messageInput"
+                                                action=""
+                                                onSubmit={e=>this.sendMessage.apply(this, [e])}
                                             >
-                                                {this.state.application.exectutorFullName ? "Переназначить" : "Назначить"}
-                                            </button> : ''
-                                        }
-                                        {
-                                            !this.state.application.exectutorFullName ? 
-                                            <button
-                                                className="applicationPage_event"
-                                                onClick={()=>this.getApplication.apply(this)}
-                                            >
-                                                Добавить в "Мои заявки"
-                                            </button> : ''
-                                        }
-                                    </div> : ''
+                                                <button
+                                                    className={"applicationPage_eventsButton material-icons" + (this.state.showEvents ? " applicationPage_eventsButton__active" : "")}
+                                                    title="Функции заявки."
+                                                    onClick={(e)=>this.changeEventsShow.apply(this, [e])}
+                                                    type="button"
+                                                >
+                                                    apps
+                                                </button>
+
+                                                <input
+                                                    className="applicationPage_messageTextBox"
+                                                    placeholder="Написать сообщение заявителю..."
+                                                    title="Текстовое поле для ввода сообщения."
+                                                />
+
+                                                <button
+                                                    className="applicationPage_sendButton material-icons"
+                                                    title="Отправить сообщение."
+                                                    type="submit"
+                                                >send</button>
+                                            </form>
+                                        </>
+                                        : (
+                                            <div className="applicationPage_completedBlock">
+                                                <p className="applicationPage_completedTitle">Результат выполнения заявки:</p>
+                                                <p className="applicationPage_completedText" dangerouslySetInnerHTML={{__html: this.state.application.completed.resultText}} />
+                                                <p className="applicationPage_completedDate">{this.state.application.completed.date}</p>
+                                            </div>
+                                        )
+
                                 }
-
-                                <form
-                                    className="applicationPage_messageInput"
-                                    action=""
-                                    onSubmit={e=>this.sendMessage.apply(this, [e])}
-                                >
-                                    <button
-                                        className={"applicationPage_eventsButton material-icons" + (this.state.showEvents ? " applicationPage_eventsButton__active" : "")}
-                                        title="Функции заявки."
-                                        onClick={(e)=>this.changeEventsShow.apply(this, [e])}
-                                        type="button"
-                                    >
-                                        apps
-                                    </button>
-
-                                    <input
-                                        className="applicationPage_messageTextBox"
-                                        placeholder="Написать сообщение заявителю..."
-                                        title="Текстовое поле для ввода сообщения."
-                                    />
-
-                                    <button
-                                        className="applicationPage_sendButton material-icons"
-                                        title="Отправить сообщение."
-                                        type="submit"
-                                    >send</button>
-                                </form>
                             </div>
                         </div>
                     </>
