@@ -15,13 +15,14 @@ class ApplicationsView extends React.Component {
             toolsMobState: false,
             searchValues: {
                 search: '',
-                sortBy: 'date',
-                sortDirection: 'desc',
+                sort_by: 'date',
+                sort: 'asc',
                 date: '',
                 page: 1
             },
             loading: false,
             applications: null,
+            viewMode: 'blocks',
             pagination: {
                 total: null,
                 loaded: null,
@@ -31,7 +32,64 @@ class ApplicationsView extends React.Component {
     }
 
     componentDidMount () {
+        const settings = JSON.parse(localStorage.getItem('settings'))
+        const viewMode = settings ? settings.applications ? settings.applications.viewMode : 'blocks' : 'blocks'
+        this.setState({
+            viewMode
+        })
+        if (settings) {
+            if (settings.applications) {
+                if (!settings.applications.viewMode) {
+                    const newSettings = JSON.parse(localStorage.getItem('settings'))
+                    newSettings.applications.viewMode = 'blocks'
+                    localStorage.setItem('settings', JSON.stringify(newSettings))
+                }
+            }
+            else {
+                const newSettings = JSON.parse(localStorage.getItem('settings'))
+                newSettings.applications = {
+                    viewMode: 'blocks'
+                }
+                localStorage.setItem('settings', JSON.stringify(newSettings))
+            }
+        }
+        else {
+            localStorage.setItem('settings', JSON.stringify({
+                applications: {
+                    viewMode: 'blocks'
+                }
+            }))
+        }
         this.initSearch()
+    }
+
+    changeViewMode () {
+        this.setState ({
+            viewMode: this.state.viewMode === 'blocks' ? 'strings' : 'blocks'
+        }, ()=>{
+            const settings = JSON.parse(localStorage.getItem('settings'))
+            if (settings) {
+                if (settings.applications) {
+                    const newSettings = JSON.parse(localStorage.getItem('settings'))
+                    newSettings.applications.viewMode = this.state.viewMode
+                    localStorage.setItem('settings', JSON.stringify(newSettings))
+                }
+                else {
+                    const newSettings = JSON.parse(localStorage.getItem('settings'))
+                    newSettings.applications = {
+                        viewMode: this.state.viewMode
+                    }
+                    localStorage.setItem('settings', JSON.stringify(newSettings))
+                }
+            }
+            else {
+                localStorage.setItem('settings', JSON.stringify({
+                    applications: {
+                        viewMode: this.state.viewMode
+                    }
+                }))
+            }
+        })
     }
 
     changeToolsState () {
@@ -59,7 +117,7 @@ class ApplicationsView extends React.Component {
 
     changeSortDirections (direction) {
         const {searchValues} = this.state
-        searchValues.sortDirection = direction
+        searchValues.sort = direction
         this.setState({
             searchValues
         })
@@ -144,6 +202,13 @@ class ApplicationsView extends React.Component {
                     action=""
                     onSubmit={e=>this.initSearch.apply(this, [e])}
                 >
+                    <button
+                        className="applicationsView_viewModeButton material-icons"
+                        onClick={()=>this.changeViewMode.apply(this)}
+                        title={this.state.viewMode === 'blocks' ? "Переключить на строчный режим." : "Переключить на плиточный режим"}
+                    >
+                        {this.state.viewMode === 'blocks' ? "view_stream" : "view_module"}
+                    </button>
                     <div className="applicationsView_search">
                         <input
                             name="search"
@@ -160,10 +225,10 @@ class ApplicationsView extends React.Component {
                     </div>
                     <div className={"applicationsView_sort" + (!this.state.toolsMobState ? ' applicationsView_tools__hidden' : '')}>
                         <select
-                            name="sortBy"
+                            name="sort_by"
                             className="applicationsView_sortBy"
                             onChange={e=>this.changeValueOfSearch.apply(this, [e])}
-                            value={this.state.searchValues.sortBy}
+                            value={this.state.searchValues.sort_by}
                         >
                             <option value="full_name">По Ф.И.О. заявителя</option>
                             <option value="phone_type">По типу телефона заявителя</option>
@@ -175,12 +240,12 @@ class ApplicationsView extends React.Component {
                             <option value="date">По дате подачи заявки</option>
                         </select>
                         <button
-                            className={"applicationsView_sortDirection material-icons" + (this.state.searchValues.sortDirection === 'desc' ? ' applicationsView_sortDirection__active' : '')}
+                            className={"applicationsView_sortDirection material-icons" + (this.state.searchValues.sort === 'desc' ? ' applicationsView_sortDirection__active' : '')}
                             title="Сортировать по убыванию"
                             onClick={()=>this.changeSortDirections.apply(this, ['desc'])}
                         >keyboard_arrow_down</button>
                         <button
-                            className={"applicationsView_sortDirection material-icons" + (this.state.searchValues.sortDirection === 'asc' ? ' applicationsView_sortDirection__active' : '')}
+                            className={"applicationsView_sortDirection material-icons" + (this.state.searchValues.sort === 'asc' ? ' applicationsView_sortDirection__active' : '')}
                             title="Сортировать по возрастанию"
                             onClick={()=>this.changeSortDirections.apply(this, ['asc'])}
                         >keyboard_arrow_up</button>
@@ -217,10 +282,11 @@ class ApplicationsView extends React.Component {
                                 this.state.applications.length > 0 ?
                                     this.state.applications.map((application, i) => 
                                         <ApplicationCard
-                                            className="applicationsView_application"
+                                            className={(this.state.viewMode !== 'blocks' ? 'applicationsView_application__strings ' : '') + "applicationsView_application"}
                                             key={i}
                                             data={application}
                                             state={this.props.state}
+                                            viewMode={this.state.viewMode}
                                             onApplicationStateChange={()=>this.initSearch.apply(this)}
                                         />
                                     ) : ''

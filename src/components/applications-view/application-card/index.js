@@ -16,8 +16,15 @@ class ApplicationCard extends React.Component {
 
         this.state = {
             newMessage: '',
-            messages: []
+            messages: [],
+            stringEventsMode: false
         }
+    }
+
+    changeEventsVisible () {
+        this.setState({
+            stringEventsMode: !this.state.stringEventsMode
+        })
     }
 
     endApplication () {
@@ -132,7 +139,7 @@ class ApplicationCard extends React.Component {
         const {data, user} = this.props
         const userData = user.data
         return (
-            <div className={"application " + this.props.className}>
+            <div className={"application " + this.props.className + (this.props.viewMode !== 'blocks' ? ' application__strings' : '')}>
                 <div className="application_code">
                     {data.application_code}
                 </div>
@@ -185,6 +192,14 @@ class ApplicationCard extends React.Component {
                     </table>
                 </div>
 
+                {
+                    this.props.viewMode !== 'blocks' ?
+                        <div className="application_text">
+                            <p className="application_textTitle">Текст заявки:</p>
+                            {data.application_text}
+                        </div> : ''
+                }
+
                 <div className="application_messages">
                     <div className="application_messageWrapper">
                         <div className="application_message">
@@ -211,40 +226,52 @@ class ApplicationCard extends React.Component {
                                         {data.last_message.text}
                                     </div>
                                     <div className="application_messageDate">
-                                        {new Date(data.last_message.date).toLocaleTimeString(global.lang) + ' ' +
-                                        new Date(data.last_message.date).toLocaleDateString(global.lang)}
+                                        {
+                                            new Date(data.last_message.date).toLocaleTimeString(global.lang) + ' ' +
+                                            new Date(data.last_message.date).toLocaleDateString(global.lang)
+                                        }
                                     </div>
                                 </div>
                             : ''
                         }
                         {
-                            this.state.messages.map((message, i) =>
-                                message.date.getTime() > new Date(data.last_message.date).getTime() ?
-                                <div
-                                    className="application_message application_message__auth"
-                                    key={i}
-                                >
-                                    <div className="application_messageOwner">
-                                        Вы
-                                    </div>
-                                    <div className="application_messageText">
-                                        {message.text}
-                                    </div>
-                                    <div className="application_messageDate">
-                                        {message.date.toLocaleTimeString(global.lang) + ' ' +
-                                            message.date.toLocaleDateString(global.lang)}
-                                    </div>
-                                </div> : ''
-                            )
+                            this.state.messages.map((message, i) => {
+                                const tmpDate = data.last_message ? data.last_message.date : 0
+                                return message.date.getTime() > new Date(tmpDate).getTime() ?
+                                        <div
+                                            className="application_message application_message__auth"
+                                            key={i}
+                                        >
+                                            <div className="application_messageOwner">
+                                                Вы
+                                            </div>
+                                            <div className="application_messageText">
+                                                {message.text}
+                                            </div>
+                                            <div className="application_messageDate">
+                                                {message.date.toLocaleTimeString(global.lang) + ' ' +
+                                                    message.date.toLocaleDateString(global.lang)}
+                                            </div>
+                                        </div> : ''
+                            })
                         }
                     </div>
                 </div>
 
                 <div className="application_events">
                     {
-                        userData.role === 0 ?
+                        this.props.viewMode !== 'blocks' ?
+                            <button
+                                onClick={()=>this.changeEventsVisible.apply(this)}
+                                className={(this.state.stringEventsMode ? "application_eventsStringButton__show " : "")+"application_eventsStringButton material-icons"}
+                                title={this.state.stringEventsMode ? "Скрыть функции заявки." : "Показать функции заявки."}
+                            >add</button>
+                        : ''
+                    }
+                    {
+                        userData.role !== 2 && this.props.state !== 'completed' && this.props.viewMode === 'blocks' ?
                         <button
-                            className="application_event"
+                            className={"application_event" + (this.state.stringEventsMode ? "" : " application_event__stringModeHidden")}
                             title="Завершить заявку."
                             onClick={e=>this.endApplication.apply(this, [e])}
                         >
@@ -252,10 +279,10 @@ class ApplicationCard extends React.Component {
                         </button> : ''
                     }
                     {
-                        userData.role === 0 || userData.role === 1 ?
+                        (userData.role === 0 || userData.role === 1) && this.props.state !== 'completed' && this.props.viewMode === 'blocks' ?
                         <button
                             title="Назначить исполнителя на заявку."
-                            className="application_event"
+                            className={"application_event" + (this.state.stringEventsMode ? "" : " application_event__stringModeHidden")}
                             onClick={e=>this.setApplicationExecutor.apply(this, [e])}
                         >
                             {this.props.state === 'created' ? "Назначить" : "Переназначить"}
@@ -265,7 +292,7 @@ class ApplicationCard extends React.Component {
                         this.props.state === 'created' ?
                         <button
                             title="Добавить в ''Мои заявки''"
-                            className="application_event"
+                            className={"application_event" + (this.state.stringEventsMode ? "" : " application_event__stringModeHidden")}
                             onClick={e=>this.getApplication.apply(this, [e])}
                         >
                             Добавить в "Мои заявки"
@@ -274,9 +301,9 @@ class ApplicationCard extends React.Component {
                     {
                         this.props.state === 'processing' || this.props.state === 'completed' || userData.role < 2 ?
                         <Link
-                            className="application_event"
+                            className={"application_event" + (this.state.stringEventsMode ? "" : " application_event__stringModeHidden")}
                             title="Перейти на страницу заявки"
-                            to={"/control-panel/applications/" + data.application_code}
+                            to={(this.props.state === 'completed' ? "/control-panel/archive/" : "/control-panel/applications/") + data.application_code}
                         >
                             Подробнее...
                         </Link> : ''
