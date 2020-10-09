@@ -81,7 +81,9 @@ class AddApplication extends React.Component {
             })
         })
         .catch(err=>{
-            this.props.closeModal()
+            this.setState({
+                page: 0
+            })
             this.props.createResultModal(err)
         })
 

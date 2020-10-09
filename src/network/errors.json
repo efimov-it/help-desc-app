@@ -127,5 +127,17 @@
     },
     "The application has already been completed" : {
         "RU-ru" : "Заявка уже завершена."
+    },
+    "Too long value of unit" : {
+        "RU-ru" : "Слищком длинное значение для поля подразделение."
+    },
+    "Too long value of dept" : {
+        "RU-ru" : "Слищком длинное значение для поля отдел."
+    },
+    "Too long value of office" : {
+        "RU-ru" : "Слищком длинное значение для поля кабинет."
+    },
+    "" : {
+        "RU-ru" : "."
     }
 }
