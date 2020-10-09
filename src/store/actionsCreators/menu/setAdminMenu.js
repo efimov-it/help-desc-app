@@ -6,7 +6,7 @@ export default () => {
         menuItems: [
             {
                 text: 'Панель управления',
-                icon: 'edit',
+                icon: 'dashboard',
                 event: {
                     type: "url",
                     url: "/control-panel/"
@@ -18,6 +18,14 @@ export default () => {
                 event: {
                     type: "url",
                     url: "/control-panel/applications/"
+                }
+            },
+            {
+                text: 'Архив',
+                icon: 'assignment_turned_in',
+                event: {
+                    type: "url",
+                    url: "/control-panel/archive/"
                 }
             },
             {

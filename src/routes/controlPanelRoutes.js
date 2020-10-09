@@ -18,6 +18,10 @@ export default [
         component: Applications
     },
     {
+        path: '/control-panel/archive/',
+        component: Applications
+    },
+    {
         path: '/control-panel/users/',
         component: Users
     },

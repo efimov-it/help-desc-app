@@ -21,8 +21,22 @@ class Applications extends React.Component {
                         state="processing"
                     />
                 </Route>
+                <Route
+                    path="/control-panel/archive/"
+                    exact
+                >
+                    <ApplicationsView
+                        token={user.token}
+                        state="completed"
+                    />
+                </Route>
                 <Route 
                     path="/control-panel/applications/:key"
+                >
+                    <ApplicationPage />
+                </Route>
+                <Route 
+                    path="/control-panel/archive/:key"
                 >
                     <ApplicationPage />
                 </Route>

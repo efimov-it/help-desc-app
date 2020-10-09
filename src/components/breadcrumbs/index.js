@@ -15,6 +15,7 @@ class Breadcrumbs extends React.Component {
             'control-panel': 'Панель управления',
             'profile': 'Профиль',
             'applications': 'Мои заявки',
+            'archive': 'Архив',
             'users': 'Пользователи',
             'settings': 'Настройки'
         }
@@ -34,7 +35,8 @@ class Breadcrumbs extends React.Component {
                         })
                     }
                     else {
-                        const name = breadcrumbs[breadcrumbs.length - 1].name === 'Мои заявки' ? 'Заявка #'+path : path
+                        const name = breadcrumbs[breadcrumbs.length - 1].name === 'Мои заявки' ||
+                                     breadcrumbs[breadcrumbs.length - 1].name === 'Архив' ? 'Заявка #'+path : path
                         breadcrumbs.push({
                             name: name,
                             path: '/'+path+'/'
