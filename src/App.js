@@ -74,9 +74,18 @@ class App extends React.Component {
     }
   }
 
+  interfaceClick (e) {
+    if (e.target.nodeName !== "TEXTAREA" && e.target.nodeName !== "INPUT") {
+      e.preventDefault()
+    }
+  }
+
   render () {
     return (
-        <div className="app">
+        <div
+          className="app"
+          onContextMenu={e=>this.interfaceClick.apply(this, [e])}
+        >
           {
             this.state.isReady ?
               (<>

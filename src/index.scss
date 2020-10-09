@@ -14,9 +14,11 @@
 
   &::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
 
     @media (max-width: 500px) {
       width: 5px;
+      height: 5px;
     }
 
     &-button {
