@@ -63,7 +63,8 @@ class ApplicationsView extends React.Component {
         this.initSearch()
     }
 
-    changeViewMode () {
+    changeViewMode (e) {
+        e.preventDefault()
         this.setState ({
             viewMode: this.state.viewMode === 'blocks' ? 'strings' : 'blocks'
         }, ()=>{
@@ -204,7 +205,7 @@ class ApplicationsView extends React.Component {
                 >
                     <button
                         className="applicationsView_viewModeButton material-icons"
-                        onClick={()=>this.changeViewMode.apply(this)}
+                        onClick={(e)=>this.changeViewMode.apply(this, [e])}
                         title={this.state.viewMode === 'blocks' ? "Переключить на строчный режим." : "Переключить на плиточный режим"}
                     >
                         {this.state.viewMode === 'blocks' ? "view_stream" : "view_module"}

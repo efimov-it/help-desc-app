@@ -246,17 +246,15 @@
         overflow: hidden;
         border-radius: 0px;
         padding: 20px 20px 50px 30px;
-        // max-width: 1100px;
-        // margin: 0px auto;
+        border-bottom: 1px dashed #b0b0b0;
 
         &:first-child {
             border-radius: 10px 10px 0px 0px;
         }
-        &:not(:last-child) {
-            border-bottom: 1px dashed #b0b0b0;
-        }
-        &:last-child {
+        &:nth-last-child(2) {
             border-radius: 0px 0px 10px 10px;
+            border-bottom: none;
+            margin-bottom: 40px;
         }
         &::before {
             content: '';
@@ -312,6 +310,12 @@
                 &Title {
                     font-weight: bold;
                 }
+                &Date {
+                    font-style: italic;
+                    color: #7a7a7a;
+                    font-size: 14px;
+                    margin-top: 5px;
+                }
             }
             &_messages {
                 display: none;
@@ -326,7 +330,7 @@
                 height: 50px;
                 display: flex;
                 align-items: center;
-                bottom: 10px;
+                bottom: 15px;
                 right: 20px;
                 padding-right: 70px;
 

@@ -197,6 +197,10 @@ class ApplicationCard extends React.Component {
                         <div className="application_text">
                             <p className="application_textTitle">Текст заявки:</p>
                             {data.application_text}
+                            <p className="application_textDate">
+                                {new Date(data.date).toLocaleTimeString(global.lang) + ' ' +
+                                 new Date(data.date).toLocaleDateString(global.lang)}
+                            </p>
                         </div> : ''
                 }
 
@@ -265,7 +269,7 @@ class ApplicationCard extends React.Component {
                                 onClick={()=>this.changeEventsVisible.apply(this)}
                                 className={(this.state.stringEventsMode ? "application_eventsStringButton__show " : "")+"application_eventsStringButton material-icons"}
                                 title={this.state.stringEventsMode ? "Скрыть функции заявки." : "Показать функции заявки."}
-                            >add</button>
+                            >more_vert</button>
                         : ''
                     }
                     {

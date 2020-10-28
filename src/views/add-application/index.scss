@@ -53,6 +53,17 @@
         cursor: text;
         background-color: #efefef;
     }
+
+    &_subscribe {
+        &Block {
+            display: flex;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        &Checkbox {
+            margin-right: 10px;
+        }
+    }
 }
 
 .phoneType {

@@ -26,14 +26,31 @@ export default class Input extends React.Component {
                 className={"inputPlaceholder " + this.props.className}
                 title={this.props.title}
             >
-                <input
-                    className="input inputPlaceholder_value"
-                    type={this.props.type ? this.props.type : 'text'}
-                    value={this.state.value}
-                    onChange={e=>this.onChange.apply(this, [e])}
-                    disabled={this.props.disabled}
-                    name={this.props.name}
-                />
+                {
+                    this.props.type === 'select' ?
+                        <select
+                            className="input inputPlaceholder_value"
+                            value={this.state.value}
+                            onChange={e=>this.onChange.apply(this, [e])}
+                            disabled={this.props.disabled}
+                            name={this.props.name}
+                        >
+                            {
+                                this.props.options.map(({value, text}) =>
+                                    <option value={value}>{text}</option>
+                                )
+                            }
+                        </select>
+                    :
+                        <input
+                            className="input inputPlaceholder_value"
+                            type={this.props.type ? this.props.type : 'text'}
+                            value={this.state.value}
+                            onChange={e=>this.onChange.apply(this, [e])}
+                            disabled={this.props.disabled}
+                            name={this.props.name}
+                        />
+                }
                 <p className="inputPlaceholder_placeholder">{this.props.placeholder}</p>
             </label>
         )    

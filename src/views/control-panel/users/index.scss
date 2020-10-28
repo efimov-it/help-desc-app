@@ -1,0 +1,191 @@
+.users {
+    &_side {
+        display: flex;
+        flex-direction: column;
+        max-width: 400px;
+        min-width: 400px;
+        margin: -20px 20px -20px -20px;
+        padding: 20px;
+        border-right: 1px solid #f0f0f0;
+    }
+    &_tools {
+        margin: -20px -20px 20px -20px;
+        height: 60px;
+        padding: 10px 20px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    &_button {
+        min-width: 40px;
+        max-width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        padding: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color .3s ease-in-out;
+
+        &:hover {
+            background-color: #dedede;
+        }
+
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+
+        &:disabled {
+            opacity: .5;
+            background-color: #dedede;
+            cursor: not-allowed;
+        }
+    }
+    &_list {
+        margin: -20px -20px -20px -65px;
+        padding-left: 45px;
+        list-style: none;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100%;
+
+        &Item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: .3s ease-in-out;
+
+            &:hover {
+                background-color: #f8f8f8;
+            }
+
+            &__notSelect {
+                & > * {
+                    opacity: .5;
+                }
+            }
+
+            &__select {
+                cursor: default;
+                background-color: #ffffff;
+
+                &:hover {
+                    background: #ffffff;
+                }
+            }
+
+            &__notEdit {
+                user-select: none;
+                pointer-events: none;
+                filter: saturate(0);
+            }
+        }
+
+        &Avatar {
+            min-width: 60px;
+            min-height: 60px;
+            max-width: 60px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            max-height: 60px;
+            border-radius: 50px;
+            margin-right: 20px;
+            background: linear-gradient(90deg, #03a9f4, #00bcd5);
+            transition: opacity .3s ease-in-out;
+        }
+
+        &Text {
+            transition: opacity .3s ease-in-out;
+        }
+
+        &Name {
+            color: #505050;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 16px;
+            margin-bottom: 5px;
+        }
+        &Type {
+            font-style: italic;
+            color: #707070;
+        }
+
+        &Empty {
+            font-size: 19px;
+        }
+    }
+
+    &_view {
+        width: calc(100% + 40px);
+        display: flex;
+        flex-direction: column;
+        margin: -20px;
+        &Header {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        &Name {
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        &Content {
+            padding: 20px;
+        }
+        &Table {
+            max-width: 800px;
+
+            tr {
+
+                & td:first-child {
+                    width: 210px;
+                    font-weight: bold;
+                }
+            }
+        }
+        &Field {
+            max-width: 800px;
+        }
+        &Select {
+            &::before {
+                content: '123';
+            }
+        }
+        
+        &Empty {
+            font-size: 19px;
+            align-self: center;
+            margin: 0px auto;
+        }
+
+        &Wrapper {
+            display: flex;
+            width: 100%;
+        }
+    }
+
+    &_wrapper {
+        display: flex;
+        position: absolute;
+        width: calc(100% - 40px);
+        max-width: 1560px;
+        top: 100px;
+        bottom: 0px;
+
+        @media (max-width: 500px) {
+            width: calc(100% - 20px);
+            top: 85px;
+        }
+    }
+}

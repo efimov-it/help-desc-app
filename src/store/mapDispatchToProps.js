@@ -140,6 +140,22 @@ export default function mapDispatchToProps (component) {
             }
         }
 
+        case 'profile' : return dispatch => {
+            return {
+                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+            }
+        }
+
+        case 'users' : return dispatch => {
+            return {
+                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+            }
+        }
+
         default: return undefined
     }
 }

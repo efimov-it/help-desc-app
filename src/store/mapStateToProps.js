@@ -44,6 +44,18 @@ export default function mapStateToProps (component) {
             }
         }
 
+        case 'profile' : return state => {
+            return {
+                user: state.user
+            }
+        }
+
+        case 'users' : return state => {
+            return {
+                user: state.user
+            }
+        }
+
         default: return undefined
     }
 }

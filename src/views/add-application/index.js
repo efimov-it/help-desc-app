@@ -8,6 +8,7 @@ import mapStateToProps from '../../store/mapStateToProps'
 import Input from '../../components/input'
 import Switcher from '../../components/switcher'
 import LoadingIndicator from '../../components/loadingIndicator'
+import Checkbox from '../../components/checkbox'
 
 class AddApplication extends React.Component {
     constructor (props) {
@@ -23,7 +24,8 @@ class AddApplication extends React.Component {
                 office: '',
                 unit: '',
                 dept: '',
-                application_text: ''
+                application_text: '',
+                subscribe: false
             },
             workerDataComplete: false,
             dataComplete: false,
@@ -39,7 +41,6 @@ class AddApplication extends React.Component {
     }
 
     changeValue (e) {
-        console.log(e);
         const data = this.state.data
         data[e.target.name] = e.target.type === "checkbox" ? e.target.checked : e.target.value
         this.setState({
@@ -284,6 +285,17 @@ class AddApplication extends React.Component {
                             </table>
                         </div>
                         
+                        <label className="addApplication_subscribeBlock">
+                            <Checkbox
+                                name="subscribe"
+                                className="addApplication_subscribeCheckbox"
+                                onChange={e=>this.changeValue.apply(this, [e])}
+                            />
+                            <p className="addApplication_subscribeText">
+                                Подписаться на обновления статуса заявки. На Ваш почтовый адрес будут приходить сообщения об обновлениях по Вашей заявке.
+                            </p>
+                        </label>
+
                         <div className="modal_buttons">
                             <button
                                 className="button modal_button"

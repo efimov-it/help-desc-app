@@ -39,29 +39,30 @@ class App extends React.Component {
       })
       .then(resp=>{
         this.props.closeModal()
-          localStorage.setItem('token', token)
-          this.props.login(token)
-          this.props.setUserData({
-              fullName: resp.full_name,
-              login: resp.login,
-              mail: resp.mail,
-              role: resp.user_type,
-              post: resp.user_post
-          })
-          this.setState({
-            isReady: true
-          })
-          switch (resp.user_type) {
-              case 0 : return this.props.setAdminMenu()
-              case 1 : return this.props.setModeratorMenu()
-              case 2 : return this.props.setUserMenu()
-              default : return this.props.setGuestMenu()
-          }
+        localStorage.setItem('token', token)
+        this.props.login(token)
+        this.props.setUserData({
+            fullName: resp.full_name,
+            login: resp.login,
+            mail: resp.mail,
+            role: resp.user_type,
+            post: resp.user_post
+        })
+        this.setState({
+          isReady: true
+        })
+        switch (resp.user_type) {
+            case 0 : return this.props.setAdminMenu()
+            case 1 : return this.props.setModeratorMenu()
+            case 2 : return this.props.setUserMenu()
+            default : return this.props.setGuestMenu()
+        }
       })
       .catch(err=>{
         this.props.closeModal()
         localStorage.removeItem('token')
         this.props.createResultModal(err, 'error')
+        this.props.history.push('/')
         this.setState({
           isReady: true
         })

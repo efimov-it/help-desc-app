@@ -1,0 +1,175 @@
+.profile {
+    &_wrapper {
+        padding-top: 40px;
+        display: flex;
+        justify-content: center;
+
+        @media (max-width: 800px) {
+            flex-direction: column;
+        }
+    }
+
+    &_cancel {
+        &Edit {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-size: 18px;
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+            margin-top: 200px;
+            cursor: pointer;
+            transition: .3s ease-in-out;
+            transform: translateY(50px);
+            opacity: 0;
+            pointer-events: none;
+
+            &__shown {
+                pointer-events: all;
+                transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+    }
+
+    &_info {
+        width: 400px;
+        margin-right: 40px;
+        
+        @media (max-width: 800px) {
+            margin-right: 0px;
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: row;
+
+            @media (max-width: 600px) {
+                flex-direction: column;
+            }
+        }
+    }
+
+    &_avatar {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 150px;
+        font-size: 225px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+
+        &Wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            min-width: 200px;
+            background: linear-gradient(90deg, #03a9f4, #00bcd5);
+            border-radius: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0px auto 20px auto;
+            box-shadow: 0px 20px 20px rgba(#03a9f4, .2);
+        }
+    }
+
+    &_edit {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 10px;
+        border-radius: 30px;
+        border: 5px solid #f8f8f8;
+        cursor: pointer;
+        color: #ffffff;
+        background: linear-gradient(90deg, #03a9f4, #00bcd5);
+        transition: filter .3s ease-in-out;
+
+        &:disabled {
+            filter: saturate(0);
+        }
+    }
+
+    &_nameBlock {
+        width: 100%;
+    }
+
+    &_fullName, &_fullNameInput {
+        font-size: 38px;
+        padding: 0px 60px;
+        margin-bottom: 10px;
+        font-weight: bold;
+
+        @media (max-width: 600px) {
+            padding: 0px;
+            text-align: center;
+        }
+    }
+    &_fullNameInput {
+        padding: 0px 0px 5px 0px;
+        width: 100%;
+        border: none;
+        background: none;
+        border-bottom: 2px solid #6e6e6e;
+        transition: border-color .3s ease-in-out;
+
+        &:focus, &:not([value=""]) {
+            border-color: #03a9f4;
+        }
+    }
+
+    &_login {
+        font-size: 28px;
+        padding: 0px 60px;
+        color: #6e6e6e;
+        font-style: italic;
+
+        @media (max-width: 600px) {
+            padding: 0px;
+            text-align: center;
+        }
+    }
+
+    &_fields {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.profileField {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background: #ffffff;
+    padding: 10px 20px 10px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(#000000, 0.05);
+
+    &_icon {
+        padding: 10px;
+        background: linear-gradient(90deg, #03a9f4, #00bcd5);;
+        border-radius: 10px;
+        margin-right: 20px;
+        color: #ffffff;
+    }
+
+    &_text {
+        font-size: 18px;
+    }
+
+    &_input {
+        width: 100%;
+        font-size: 18px;
+        border: none;
+        border-bottom: 2px solid #6e6e6e;
+        transition: border-color .3s ease-in-out;
+
+        &:focus, &:not([value=""]) {
+            border-color: #03a9f4;
+        }
+    }
+}

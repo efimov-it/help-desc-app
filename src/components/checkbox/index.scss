@@ -1,0 +1,33 @@
+.checkbox {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    &_input {
+        appearance: none;
+        -moz-appearance: none;
+    
+        width: 20px;
+        height: 20px;
+        border: 2px solid #03a9f4;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    &_check {
+        color: #03a9f4;
+        max-width: 0px;
+        overflow: hidden;
+        height: 20px;
+        text-shadow: 1px 1px 0px #ffffff, -1px -1px 0px #ffffff;
+        position: absolute;
+        top: -4px;
+        left: 2px;
+        font-weight: bold;
+        transition: .3s ease-in-out;
+    }
+
+    &_input:checked + &_check {
+        max-width: 20px;
+    }
+}

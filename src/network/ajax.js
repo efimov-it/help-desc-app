@@ -3,7 +3,7 @@ import errors from './errors.json'
 
 const baseUrl = process.env.NODE_ENV === 'production' ?
                                         'https://help.stankin.ru/api/v1' :
-                                        'http://192.168.0.151/api/v1';
+                                        'http://help.stankin.local/api/v1';
 
 export default function ({
     url,
