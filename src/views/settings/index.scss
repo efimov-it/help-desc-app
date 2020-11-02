@@ -1,0 +1,47 @@
+.settings {
+    &_header {
+        font-size: 34px;
+        margin-bottom: 20px;
+    }
+
+    &_list {
+
+    }
+
+    &_group {
+
+        &:not(:last-child) {
+            margin: -20px -20px 20px -20px;
+            padding: 20px;
+            border-bottom: 1px solid #efefef;
+        }
+    }
+
+    &_title {
+        margin-bottom: 20px;
+    }
+
+    &_group > &_item {
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+
+    &_switcher {
+        display: flex;
+
+        & > *:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+
+    &_checkbox {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        & > *:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+}

@@ -16,6 +16,8 @@ import Modals from './components/modals'
 import LoadingIndicator from './components/loadingIndicator'
 import Auth from './views/auth'
 
+import initialSettings from './settings/initial-settings.json'
+
 import mainRoutes from './routes/mainRoutes'
 
 class App extends React.Component {
@@ -48,6 +50,12 @@ class App extends React.Component {
             role: resp.user_type,
             post: resp.user_post
         })
+
+        const settings = localStorage.getItem('settings')
+        if(!settings) {
+          localStorage.setItem('settings', JSON.stringify(initialSettings))
+        }
+
         this.setState({
           isReady: true
         })

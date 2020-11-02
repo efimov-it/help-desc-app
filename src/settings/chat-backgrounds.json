@@ -1,0 +1,93 @@
+{
+    "default" : {
+        "type": "image",
+        "title": "Геометрия (стандартная)",
+        "color": "#ffffff",
+        "messageColor": "#90CAF9",
+        "messageTextColor": "#233c61"
+    },
+    "blue" : {
+        "type": "color",
+        "title": "Голубой",
+        "color": "#63d7ec",
+        "messageColor": "#ffffff",
+        "messageTextColor": "#233c61"
+    },
+    "dark" : {
+        "type": "color",
+        "title": "Тёмный",
+        "color": "#1a1a1a",
+        "messageColor": "#ffffff",
+        "messageTextColor": "#484848"
+    },
+    "sand" : {
+        "type": "color",
+        "title": "Песчяный",
+        "color": "#e0d8c5",
+        "messageColor": "#90CAF9",
+        "messageTextColor": "#233c61"
+    },
+    "softgreen" : {
+        "type": "color",
+        "title": "Зелёный",
+        "color": "#63ec8a",
+        "messageColor": "#ffffff",
+        "messageTextColor": "#484848"
+    },
+    "softyellow" : {
+        "type": "color",
+        "title": "Жёлтый",
+        "color": "#ecdb63",
+        "messageColor": "#ffffff",
+        "messageTextColor": "#484848"
+    },
+    "white" : {
+        "type": "color",
+        "title": "Белый",
+        "color": "#ffffff",
+        "messageColor": "#90CAF9",
+        "messageTextColor": "#233c61"
+    },
+    "moscow" : {
+        "type": "image",
+        "title": "Москва",
+        "color": "#ffffff",
+        "messageColor": "#ffffff",
+        "messageTextColor": "#484848"
+    },
+    "waves" : {
+        "type": "image",
+        "title": "Волны",
+        "color": "#ffffff",
+        "messageColor": "#ffffff",
+        "messageTextColor": "#484848"
+    },
+    "palms" : {
+        "type": "image",
+        "title": "Пальмы",
+        "color": "#ffffff",
+        "messageColor": "#ffffff",
+        "messageTextColor": "#484848"
+    },
+    "desert" : {
+        "type": "image",
+        "title": "Дюны",
+        "color": "#ffffff",
+        "messageColor": "#ffffff",
+        "messageTextColor": "#484848"
+    },
+    "space" : {
+        "type": "image",
+        "title": "Столпы творения",
+        "color": "#ffffff",
+        "messageColor": "#ffffff",
+        "messageTextColor": "#484848"
+    },
+    "neon" : {
+        "type": "image",
+        "title": "Неон",
+        "color": "#ffffff",
+        "messageColor": "#ffffff",
+        "messageTextColor": "#484848"
+    }
+}

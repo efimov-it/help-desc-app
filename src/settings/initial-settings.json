@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "viewMode": "blocks"
+    },
+    "pwa": {
+        "notification": false,
+        "shortcut": false
+    },
+    "apperance": {
+        "chatBackground": "default",
+        "chatBackgroundBlur": false,
+        "theme": "white"
+    }
+}
