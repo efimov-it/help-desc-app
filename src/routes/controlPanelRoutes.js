@@ -25,8 +25,8 @@ export default [
         path: '/control-panel/users/',
         component: Users
     },
-    {
-        path: '/control-panel/settings/',
-        component: Settings
-    },
+    // {
+    //     path: '/control-panel/settings/',
+    //     component: Settings
+    // },
 ]

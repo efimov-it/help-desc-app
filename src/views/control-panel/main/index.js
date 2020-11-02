@@ -104,8 +104,9 @@ class ControlPanelMain extends React.Component{
                         gradientFrom="#465b66"
                         gradientTo="#5c6bbf"
                         icon="settings"
-                        title="Настройки приложения"
-                        to="/control-panel/settings/"
+                        className="dashboard_disabledCard"
+                        title="Доступно с следующего обновления"
+                        to="/control-panel/"
                     >
                         <div className="dashboardSettings">
                             <div className="dashboardSettings_header">

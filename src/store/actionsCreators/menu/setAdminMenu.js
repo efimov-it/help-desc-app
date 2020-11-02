@@ -36,14 +36,14 @@ export default () => {
                     url: "/control-panel/users/"
                 }
             },
-            {
-                text: 'Настройки',
-                icon: 'settings',
-                event: {
-                    type: "url",
-                    url: "/control-panel/settings/"
-                }
-            },
+            // {
+            //     text: 'Настройки',
+            //     icon: 'settings',
+            //     event: {
+            //         type: "url",
+            //         url: "/control-panel/settings/"
+            //     }
+            // },
         ]
     }
 }

@@ -8,16 +8,16 @@ export default [
         path: '/',
         component: MainPage
     },
-    {
-        path: '/license/',
-        component: License
-    },
+    // {
+    //     path: '/license/',
+    //     component: License
+    // },
     {
         path: '/control-panel/',
         component: ControlPanel
     },
-    {
-        path: '/settings/',
-        component: Settings
-    }
+    // {
+    //     path: '/settings/',
+    //     component: Settings
+    // }
 ]

@@ -27,14 +27,14 @@ const initialState = {
                     }
                 }
             },
-            {
-                text: 'Настройки',
-                icon: 'settings',
-                event: {
-                    type: 'url',
-                    url: '/settings'
-                }
-            }
+            // {
+            //     text: 'Настройки',
+            //     icon: 'settings',
+            //     event: {
+            //         type: 'url',
+            //         url: '/settings'
+            //     }
+            // }
         ]
     }
 }

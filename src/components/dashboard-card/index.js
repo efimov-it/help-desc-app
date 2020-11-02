@@ -7,7 +7,7 @@ export default class DashboardCard extends React.Component {
         return (
             <Link
                 to={this.props.to}
-                className="dashboard-card"
+                className={"dashboard-card" + (this.props.className ? " " + this.props.className : "")}
                 title={this.props.title}
                 style={{
                     boxShadow: `0px 20px 30px ${this.props.gradientTo}77`,
