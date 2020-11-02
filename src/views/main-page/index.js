@@ -22,9 +22,24 @@ class MainPage extends React.Component {
         super(props);
 
         this.state = {
-            applicationCount: 7,
-            processingTime: '4,3'
+            applicationsCount: 0,
+            processingTime: 0
         }
+    }
+
+    componentDidMount () {
+        global.sendRequest({
+            url: '/init/'
+        })
+        .then(resp=>{
+            this.setState({
+                applicationsCount: resp.applications_count,
+                processingTime: resp.processing_time
+            })
+        })
+        .catch(err=>{
+            this.props.createResultModal(err, 'error')
+        })
     }
 
     newApplicationsModal () {
@@ -61,10 +76,10 @@ class MainPage extends React.Component {
                     <div className="main-page_cards">
                         <Card backgroundImage={BannerImage1}>
                             <div className="main-page_card-counter"
-                                 title={'В данный момент тех. поддержка обрабатывает ' + this.state.applicationCount + ' заявок.'}>
+                                 title={'В данный момент тех. поддержка обрабатывает ' + this.state.applicationsCount + ' заявок.'}>
                                 <h2 className="main-page_card-counter-num">
-                                    {this.state.applicationCount}
-                                    <div className={'main-page_card-counter-indicator' + (this.state.applicationCount > 5 ? ' main-page_card-counter-indicator__yellow' : '')} />
+                                    {this.state.applicationsCount}
+                                    <div className={'main-page_card-counter-indicator' + (this.state.applicationsCount > 5 ? ' main-page_card-counter-indicator__yellow' : '')} />
                                 </h2>
                                 <h3 className="main-page_card-counter-title">
                                     заявок в обработке
