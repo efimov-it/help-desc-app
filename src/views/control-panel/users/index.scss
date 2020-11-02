@@ -7,6 +7,13 @@
         margin: -20px 20px -20px -20px;
         padding: 20px;
         border-right: 1px solid #f0f0f0;
+
+        @media (max-width: 900px) {
+            max-width: none;
+            min-width: 0px;
+            width: calc(100% + 40px);
+            margin: -20px;
+        }
     }
     &_tools {
         margin: -20px -20px 20px -20px;
@@ -123,6 +130,7 @@
 
     &_view {
         width: calc(100% + 40px);
+        height: calc(100% + 40px);
         display: flex;
         flex-direction: column;
         margin: -20px;
@@ -139,9 +147,15 @@
             font-size: 18px;
             font-weight: bold;
             margin-right: 10px;
+
+            @media (max-width: 500px) {
+                font-size: 14px;
+            }
         }
         &Content {
             padding: 20px;
+            height: 100%;
+            overflow-y: auto;
         }
         &Table {
             max-width: 800px;
@@ -153,6 +167,21 @@
                     font-weight: bold;
                 }
             }
+
+            @media (max-width: 500px) {
+                border: none;
+                td {
+                    border: none;
+                }
+                tr {
+                    display: flex;
+                    flex-direction: column;
+
+                    td:first-child {
+                        margin-bottom: -15px;
+                    }
+                }
+            }
         }
         &Field {
             max-width: 800px;
@@ -160,6 +189,13 @@
         &Select {
             &::before {
                 content: '123';
+            }
+        }
+        &Back {
+            margin-top: 20px;
+
+            @media (min-width: 901px) {
+                display: none;
             }
         }
         
@@ -172,6 +208,21 @@
         &Wrapper {
             display: flex;
             width: 100%;
+
+            @media (max-width: 900px) {
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                padding: 20px;
+                display: none;
+                position: absolute;
+                background: #ffffff;
+
+                &__show {
+                    display: block;
+                }
+            }
         }
     }
 
@@ -182,6 +233,7 @@
         max-width: 1560px;
         top: 100px;
         bottom: 0px;
+        overflow: hidden;
 
         @media (max-width: 500px) {
             width: calc(100% - 20px);

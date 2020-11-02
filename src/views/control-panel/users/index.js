@@ -80,14 +80,17 @@ class Users extends React.Component {
     }
 
     editUser (e, i) {
-        e.preventDefault()
+        if (e) {
+            e.preventDefault()
+        }
+        const user = this.state.users[i]
         if (this.state.isEdit === -1) {
             this.setState({
                 isEdit: i,
                 currentUser: {
-                    password: '••••••••',
-                    repeat_password: '••••••••',
-                    ...this.state.users[i]
+                    password: user.id_user !== -1 ? '••••••••' : '',
+                    repeat_password: user.id_user !== -1 ? '••••••••' : '',
+                    ...user
                 }
             }, ()=>{
                 this.setState({
@@ -96,22 +99,32 @@ class Users extends React.Component {
             })
         }
         else {
-
-            //Запрос на редактирование и проверка на существование (если был создан)
-
             const {currentUser, users} = this.state
 
-            users[i].full_name = currentUser.full_name
-            users[i].login = currentUser.login
-            users[i].mail = currentUser.mail
-            users[i].user_post = currentUser.user_post
-            users[i].user_type = currentUser.user_type
+            const endEdit = (id_user) => {
+                users[i].full_name = currentUser.full_name
+                users[i].login = currentUser.login
+                users[i].mail = currentUser.mail
+                users[i].user_post = currentUser.user_post
+                users[i].user_type = currentUser.user_type
 
-            this.setState({
-                isEdit: -1,
-                users,
-                currentUser: null
-            })
+                if (id_user) {
+                    users[i].id_user = id_user
+                }
+    
+                this.setState({
+                    isEdit: -1,
+                    users,
+                    currentUser: null
+                })
+            }
+
+            if (users[i].id_user === -1) {
+                this.createQuery(currentUser, endEdit)
+            }
+            else {
+                this.editQuery(i, currentUser, endEdit)
+            }
         }
     }
 
@@ -124,11 +137,14 @@ class Users extends React.Component {
             const buttons = [
                 {
                     text: "Да",
-                    event: ()=>this.deleteQuery(i)
+                    event: ()=>{
+                        this.deleteQuery(i)
+                        this.props.closeModal()
+                    }
                 },
                 {
                     text: "Отмена",
-                    event: ()=>{this.props.closeModal()}
+                    event: ()=>this.props.closeModal()
                 }
             ]
             this.props.createModal({
@@ -141,51 +157,173 @@ class Users extends React.Component {
             })
         }
         else {
-            const buttons = [
-                {
-                    text: "Да",
-                    event: ()=>{
-                        this.setState ({
-                            isEdit: -1
-                        })
-                        this.props.closeModal()
+            const {users} = this.state
+            if (users[i].id_user === -1) {
+                const buttons = [
+                    {
+                        text: "Да",
+                        event: ()=>{
+                            users.splice(0, 1)
+                            this.setState ({
+                                isEdit: -1,
+                                selectedUser: -1,
+                                users
+                            })
+                            this.props.closeModal()
+                        }
+                    },
+                    {
+                        text: "Отмена",
+                        event: ()=>this.props.closeModal()
                     }
-                },
-                {
-                    text: "Отмена",
-                    event: ()=>{this.props.closeModal()}
+                ]
+                this.props.createModal({
+                    header: 'Отмена',
+                    content: Prompt,
+                    data: {
+                        text: 'Отменить создание пользователя?',
+                        buttons
+                    }
+                })
+            }
+            else {
+                const buttons = [
+                    {
+                        text: "Да",
+                        event: ()=>{
+                            this.setState ({
+                                isEdit: -1
+                            })
+                            this.props.closeModal()
+                        }
+                    },
+                    {
+                        text: "Отмена",
+                        event: ()=>{this.props.closeModal()}
+                    }
+                ]
+                this.props.createModal({
+                    header: 'Отмена',
+                    content: Prompt,
+                    data: {
+                        text: 'Отменить внесённые изменения?',
+                        buttons
+                    }
+                })
+            }
+        }
+    }
+
+    unselectUser (e) {
+        if (e) {
+            if (this.state.isEdit === -1) {
+                if (e.keyCode === 27) {
+                    this.setState({
+                        selectedUser: -1
+                    })
                 }
-            ]
-            this.props.createModal({
-                header: 'Отмена',
-                content: Prompt,
-                data: {
-                    text: 'Отменить внесённые изменения?',
-                    buttons
-                }
+            }
+        }
+        else {
+            this.setState({
+                selectedUser: -1
             })
         }
     }
 
-    deleteQuery (i) {
-        //запрос на удаление пользователя
-
+    createUser () {
         const {users} = this.state
-        users.splice(i, 1)
+
+        const newUser = {
+            full_name: '',
+            id_user: -1,
+            login: '',
+            mail: '',
+            user_post: '',
+            user_type: 2
+        }
+
+        users.unshift(newUser)
+
         this.setState({
-            selectedUser: -1,
             users
+        }, () => {
+            this.setState({
+                selectedUser: 0
+            })
+            this.editUser(null, 0)
         })
-        this.props.closeModal()
     }
 
-    unselectUser (e) {
-        if (this.state.isEdit === -1) {
-            if (e.keyCode === 27) {
-                this.setState({
-                    selectedUser: -1
-                })
+    //Querys
+    createQuery (userData, endEdit) {
+        let data = ''
+        Object.keys(userData).forEach(key => data += '&'+key+'='+userData[key])
+
+        global.sendRequest({
+            url: '/users/',
+            method: 'post',
+            data: data.substring(1),
+            headers: {
+                token: this.props.user.token
             }
+        }).then(resp=>{
+            endEdit(resp.id_user)
+        }).catch(err=>{
+            this.props.createResultModal(err, 'error')
+        })
+    }
+
+    editQuery (i, userData, endEdit) {
+        let data = 'id_user='+this.state.users[i].id_user
+        Object.keys(userData).forEach(key => {
+            if (this.state.users[i][key]){
+                if (this.state.users[i][key] !== userData[key] && userData[key] !== '••••••••') {
+                    data += '&'+key+'='+userData[key]
+                }
+            }
+        })
+        global.sendRequest({
+            url: '/users/',
+            method: 'put',
+            data: data,
+            headers: {
+                token: this.props.user.token
+            }
+        }).then(()=>{
+            endEdit()
+        }).catch(err=>{
+            this.props.createResultModal(err, 'error')
+        })
+    }
+
+    deleteQuery (i) {
+        const {users} = this.state
+
+        const endDeleting = () => {
+            users.splice(i, 1)
+            this.setState({
+                selectedUser: -1,
+                users
+            })
+        }
+
+        if (users[i].id !== -1) {
+            global.sendRequest({
+                url: '/users/',
+                method: 'delete',
+                data: 'id_user=' + users[i].id_user,
+                headers: {
+                    token: this.props.user.token
+                }
+            }).then(resp=>{
+                endDeleting()
+            }).catch(err=>{
+                this.props.createResultModal(err, 'error')
+            })
+        }
+        else {
+            endDeleting()
         }
     }
 
@@ -205,6 +343,7 @@ class Users extends React.Component {
                                     className="users_button material-icons"
                                     title="Создать нового пользователя"
                                     disabled={this.state.isEdit !== -1}
+                                    onClick={()=>this.createUser.apply(this)}
                                 >
                                     add
                                 </button>
@@ -224,11 +363,15 @@ class Users extends React.Component {
                                                         title={user.full_name}
                                                     >
                                                         <div className="users_listAvatar">
-                                                            {user.full_name[0]}
-                                                            {user.full_name[user.full_name.indexOf(" ")+1]}
+                                                            {
+                                                                user.full_name != '' ?
+                                                                    user.full_name[0] + '' +
+                                                                    user.full_name[user.full_name.indexOf(" ")+1] :
+                                                                    'НП'
+                                                            }
                                                         </div>
                                                         <div className="users_listText">
-                                                            <p className="users_listName">{user.full_name}</p>
+                                                            <p className="users_listName">{user.full_name != '' ? user.full_name : 'Новый пользователь'}</p>
                                                             <p className="users_listType">{user.user_type === 0 ? "Администратор" : user.user_type === 1 ? "Модератор" : "Пользователь"}</p>
                                                         </div>
                                                     </li>
@@ -240,7 +383,7 @@ class Users extends React.Component {
                                 <p className="users_listEmpty">Нет зарегистрированных пользовтаелей.</p>
                             }
                         </div>
-                        <div className="users_viewWrapper">
+                        <div className={"users_viewWrapper" + (this.state.selectedUser !== -1 ? " users_viewWrapper__show" : "")}>
                             {
                                 this.state.selectedUser !== -1 ?
                                     <form
@@ -271,50 +414,56 @@ class Users extends React.Component {
                                         <div className="users_viewContent">
                                             {
                                                 this.state.isEdit === -1 ?
-                                                    <div className="table_wrapper users_viewTable">
-                                                        <table className="table">
-                                                            <tr>
-                                                                <td>
-                                                                    Фамилия имя отчество:
-                                                                </td>
-                                                                <td>
-                                                                    {this.state.users[this.state.selectedUser].full_name}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    Логин:
-                                                                </td>
-                                                                <td>
-                                                                    {this.state.users[this.state.selectedUser].login}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    Эл. почта:
-                                                                </td>
-                                                                <td>
-                                                                    {this.state.users[this.state.selectedUser].mail}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    Должность:
-                                                                </td>
-                                                                <td>
-                                                                    {this.state.users[this.state.selectedUser].user_post}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    Тип:
-                                                                </td>
-                                                                <td>
-                                                                    {this.state.users[this.state.selectedUser].user_type === 0 ? "Администратор" : this.state.users[this.state.selectedUser].user_type === 1 ? "Модератор" : "Пользователь"}
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
+                                                    <>
+                                                        <div className="table_wrapper users_viewTable">
+                                                            <table className="table">
+                                                                <tr>
+                                                                    <td>
+                                                                        Фамилия имя отчество:
+                                                                    </td>
+                                                                    <td>
+                                                                        {this.state.users[this.state.selectedUser].full_name}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Логин:
+                                                                    </td>
+                                                                    <td>
+                                                                        {this.state.users[this.state.selectedUser].login}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Эл. почта:
+                                                                    </td>
+                                                                    <td>
+                                                                        {this.state.users[this.state.selectedUser].mail}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Должность:
+                                                                    </td>
+                                                                    <td>
+                                                                        {this.state.users[this.state.selectedUser].user_post}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Тип:
+                                                                    </td>
+                                                                    <td>
+                                                                        {this.state.users[this.state.selectedUser].user_type === 0 ? "Администратор" : this.state.users[this.state.selectedUser].user_type === 1 ? "Модератор" : "Пользователь"}
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <button
+                                                            className="users_viewBack button"
+                                                            onClick={()=>this.unselectUser.apply(this)}
+                                                        >Назад к списку</button>    
+                                                    </>
                                                 :
                                                     <>
                                                         <Input
