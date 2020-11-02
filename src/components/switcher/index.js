@@ -9,7 +9,9 @@ export default class Switcher extends React.Component {
                     type="checkbox"
                     className="switcher_input"
                     name={this.props.name}
-                    onChange={e=>this.props.onChange(e)}
+                    onChange={e=>{
+                        if (this.props.onChange) this.props.onChange(e)
+                    }}
                 />
                 <div className="switcher">
                     <div className="switcher_state" />

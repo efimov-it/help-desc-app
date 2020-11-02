@@ -9,7 +9,9 @@ export default class Checkbox extends React.Component {
                     type="checkbox"
                     className="checkbox_input"
                     name={this.props.name}
-                    onChange={e=>this.props.onChange(e)}
+                    onChange={e=>{
+                        if(this.props.onChange) this.props.onChange(e)
+                    }}
                 />
                 <i className="checkbox_check material-icons">
                     done
