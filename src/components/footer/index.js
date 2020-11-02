@@ -13,11 +13,12 @@ export default class Footer extends React.Component{
                     rel="noopener noreferrer">
                         МГТУ "Станкин" © {new Date().getFullYear()}
                 </a>
-                <Link className="footer_link link link__white"
+                {/* <Link className="footer_link link link__white"
                         to="/license/">
                         Лицензионное соглашение
-                </Link>
+                </Link> */}
                 <a className="footer_link link link__white"
+                    style={{fontSize: '14px'}}
                     href="https://github.com/efimov-it/"
                     target="_blank"
                     rel="noopener noreferrer">
