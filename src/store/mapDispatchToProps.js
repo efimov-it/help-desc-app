@@ -8,14 +8,14 @@ export default function mapDispatchToProps (component) {
     switch (component) {
         case 'app' : return dispatch => {
             return {
-                setAdminMenu:     bindActionCreators(menuActionsCreator.setAdminMenu, dispatch),
-                setModeratorMenu: bindActionCreators(menuActionsCreator.setModeratorMenu, dispatch),
-                setUserMenu:      bindActionCreators(menuActionsCreator.setUserMenu, dispatch),
-                setGuestMenu:     bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
-                login: bindActionCreators(userActionsCreator.login, dispatch),
-                setUserData: bindActionCreators(userActionsCreator.setUserData, dispatch),
-                createModal: bindActionCreators(modalsActionsCreator.createModal, dispatch),
-                closeModal: bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+                setAdminMenu:      bindActionCreators(menuActionsCreator.setAdminMenu, dispatch),
+                setModeratorMenu:  bindActionCreators(menuActionsCreator.setModeratorMenu, dispatch),
+                setUserMenu:       bindActionCreators(menuActionsCreator.setUserMenu, dispatch),
+                setGuestMenu:      bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
+                login:             bindActionCreators(userActionsCreator.login, dispatch),
+                setUserData:       bindActionCreators(userActionsCreator.setUserData, dispatch),
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch)
             }
         }
@@ -96,8 +96,8 @@ export default function mapDispatchToProps (component) {
 
         case 'controlPanelMain' : return dispatch => {
             return {
-                logout: bindActionCreators(userActionsCreator.logout, dispatch),
-                setGuestMenu: bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
+                logout:            bindActionCreators(userActionsCreator.logout, dispatch),
+                setGuestMenu:      bindActionCreators(menuActionsCreator.setGuestMenu, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
             }
         }
@@ -110,7 +110,7 @@ export default function mapDispatchToProps (component) {
 
         case 'applicationCard' : return dispatch => {
             return {
-                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
             }
@@ -118,7 +118,7 @@ export default function mapDispatchToProps (component) {
 
         case 'applicationEnd' : return dispatch => {
             return {
-                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
             }
@@ -126,7 +126,7 @@ export default function mapDispatchToProps (component) {
 
         case 'applicationSetExecutor' : return dispatch => {
             return {
-                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
             }
@@ -134,7 +134,7 @@ export default function mapDispatchToProps (component) {
 
         case 'applicationPage' : return dispatch => {
             return {
-                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
             }
@@ -142,7 +142,7 @@ export default function mapDispatchToProps (component) {
 
         case 'profile' : return dispatch => {
             return {
-                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
             }
@@ -150,7 +150,31 @@ export default function mapDispatchToProps (component) {
 
         case 'users' : return dispatch => {
             return {
-                createModal:  bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+            }
+        }
+
+        case 'categoryCard' : return dispatch => {
+            return {
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+            }
+        }
+
+        case 'categoryOfApplications' : return dispatch => {
+            return {
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
+                createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
+                closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
+            }
+        }
+
+        case 'confirmDelete' : return dispatch => {
+            return {
+                createModal:       bindActionCreators(modalsActionsCreator.createModal, dispatch),
                 createResultModal: bindActionCreators(modalsActionsCreator.createResultModal, dispatch),
                 closeModal:        bindActionCreators(modalsActionsCreator.closeModal, dispatch),
             }

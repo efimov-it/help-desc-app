@@ -17,6 +17,7 @@ class Breadcrumbs extends React.Component {
             'applications': 'Мои заявки',
             'archive': 'Архив',
             'users': 'Пользователи',
+            'category-of-applications': 'Категории заявок',
             'settings': 'Настройки'
         }
         const setBreadcrumbs = () => {

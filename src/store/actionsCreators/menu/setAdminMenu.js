@@ -36,6 +36,14 @@ export default () => {
                     url: "/control-panel/users/"
                 }
             },
+            {
+                text: 'Категории заявок',
+                icon: 'category',
+                event: {
+                    type: "url",
+                    url: "/control-panel/category-of-applications/"
+                }
+            },
             // {
             //     text: 'Настройки',
             //     icon: 'settings',
