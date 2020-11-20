@@ -23,7 +23,9 @@ class ApplicationStatus extends React.Component {
             supportFullname: null,
             supportPost: null,
             operatorFullname: null,
-            operatorPost: null
+            operatorPost: null,
+
+            returnLoading: false
         }
     }
 
@@ -81,6 +83,37 @@ class ApplicationStatus extends React.Component {
             this.props.closeModal()
             this.props.createResultModal(err, 'error')
         })
+    }
+
+    returnApplication (e) {
+        e.preventDefault()
+        e.persist()
+        const message = e.target.message.value,
+              {key}   = this.state
+
+        if (message) {
+            this.setState({
+                returnLoading: true
+            })
+            global.sendRequest({
+                url: '/applications/return/',
+                method: 'POST',
+                data: 'text='+message+"&key="+key
+            })
+            .then(resp=>{
+                this.setState({
+                    status: 'processing',
+                    completedDate: null,
+                    returnLoading: false
+                })
+            })
+            .catch(err=>{
+                this.props.createResultModal(err, 'error')
+            })
+        }
+        else {
+            this.props.createResultModal('Пожалуйста, укажите причину возврата заявки.', 'error')
+        }
     }
 
     render () {
@@ -192,6 +225,37 @@ class ApplicationStatus extends React.Component {
                                 Отправить
                             </button>
                         </form> : ''
+                    }
+                    {
+                        this.state.status === 'completed' ?
+                        <form
+                            className="application-status_message"
+                            action=""
+                            onSubmit={e=>this.returnApplication.apply(this, [e])}
+                        >
+                            {
+                                this.state.returnLoading === false ?
+                                <>
+                                    <p className="application-status_message-text">
+                                        Вы можете восстановить заявку, если считаете это нужным.
+                                    </p>
+                                    <textarea
+                                        className="application-status_message-textarea input input-area"
+                                        placeholder="Причина возврата"
+                                        name="message"
+                                        title="Причина возврата."
+                                    ></textarea>
+                                    <button 
+                                        type="submit"
+                                        className="button"
+                                    >
+                                        Восстановить заявку
+                                    </button>
+                                </>
+                                : <LoadingIndicator />
+                            }
+                        </form>
+                        : ''
                     }
                 </ScrollBar>
             </div>

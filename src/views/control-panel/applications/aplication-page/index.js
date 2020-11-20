@@ -283,6 +283,26 @@ class ApplicationPage extends React.Component {
                                     className="applicationPage_contactsButton material-icons"
                                 >sms</a>
                             </div>
+                        
+                            
+                            {
+                                this.state.application.completed ?
+                                    <form
+                                        action=""
+                                        className="applicationPage_returnForm"
+                                    >
+                                        <p className="applicationPage_returnFormText">Вы можете восстановить завершённую заявку:</p>
+                                        <textarea
+                                            className="input applicationPage_returnFormInput"
+                                            placeholder="Причина восстановления заявки"
+                                        />
+                                        <button
+                                            className="button"
+                                            type="submit"
+                                        >Восстановить</button>
+                                    </form>
+                                : ''
+                            }
                         </header>
 
                         <div className="applicationPage_content">

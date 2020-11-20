@@ -82,6 +82,18 @@
             }
         }
     }
+    &_returnForm {
+
+
+        &Text {
+            margin-bottom: 10px;
+        }
+        &Input {
+            resize: none;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+    }
     &_contacts {
         display: flex;
         align-items: center;
