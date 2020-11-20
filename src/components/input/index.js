@@ -49,6 +49,7 @@ export default class Input extends React.Component {
                             onChange={e=>this.onChange.apply(this, [e])}
                             disabled={this.props.disabled}
                             name={this.props.name}
+                            required={this.props.required}
                         />
                 }
                 <p className="inputPlaceholder_placeholder">{this.props.placeholder}</p>
